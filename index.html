@@ -54,12 +54,17 @@
         <div class="hero-text">
           <p class="kicker">DeepSeek Harness plugin · Chromium extension</p>
           <h1>Give your DeepSeek Harness agent <span class="gradient-text">real browser hands.</span></h1>
-          <p class="sub">Augmentor mounts into the DSH you already run and lets your agent drive your real Chromium browser: navigate, snapshot, click, type. All behind a visible frost veil.</p>
+          <p class="sub">Augmentor lets your agent do the web work for you: it opens pages, reads them, clicks, and types in your <strong style="color:#fff;">real Chromium browser</strong> — so you stop doing repetitive tasks by hand. It runs on the DSH you already have, and every action happens behind a frost veil you can watch.</p>
           <div class="hero-cta-row">
             <a href="#install" class="btn btn-round">Add to Chromium</a>
             <a href="#action" class="btn btn-ghost">See it in action</a>
           </div>
-          <p class="hero-meta mt-6"><span class="hl">Local llama.cpp or DeepSeek cloud</span>. Your models, your choice. No second runtime · no fork · no DSH patch.</p>
+          <ul class="hero-benefits">
+            <li><span class="tick">✓</span><span><b>It does the clicking and typing.</b> Navigate, read, fill forms, extract, and step through multi-tab flows in your real browser.</span></li>
+            <li><span class="tick">✓</span><span><b>Your models, your call.</b> Run it on a local llama.cpp model for privacy and free, or DeepSeek in the cloud — switch per conversation.</span></li>
+            <li><span class="tick">✓</span><span><b>You can trust it.</b> A frost veil sits over the tab it’s driving and tells you in plain words what it’s doing, then melts.</span></li>
+          </ul>
+          <p class="hero-meta mt-6"><span class="hl">No second runtime · no fork · no DSH patch.</span> It snaps onto the DSH you already run.</p>
         </div>
         <div class="hero-visual">
           <div>
@@ -392,7 +397,7 @@
         </div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>Which browsers and models work?</span><span class="chev">▾</span></button>
-          <div class="faq-a">Chromium-based browsers (Chrome, Chromium, and MV3 builds). Models are whatever your DSH settings define. No route is hand-declared in Augmentor, so it can never drift from the app. For cloud, the DeepSeek key comes from your DSH credential store.</div>
+          <div class="faq-a">Any Chromium-based browser — including <strong style="color:#fff;">Google Chrome, Microsoft Edge, Brave, Opera, and Vivaldi</strong>, plus plain Chromium builds. Models are whatever your DSH settings define; no route is hand-declared in Augmentor, so it can never drift from the app. For cloud, the DeepSeek key comes from your DSH credential store.</div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>Is this safe? What can it reach?</span><span class="chev">▾</span></button>
@@ -404,7 +409,11 @@
         </div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>How do I uninstall?</span><span class="chev">▾</span></button>
-          <div class="faq-a">Remove the native-host manifest (<code class="mono">~/.config/chromium/NativeMessagingHosts/com.deepseek.dsh.augmentor.json</code>) and the repo-side Augmentor files, then unload the extension. The plugin leaves DSH untouched.</div>
+          <div class="faq-a">Give this prompt to your DSH (paste it into an Augmentor chat) and it will uninstall it for you:
+          <div class="code" style="margin:1rem 0;">
+<span class="k">Uninstall</span> the <span class="p">Augmentor Agent</span> plugin and extension on this machine, but leave DeepSeek Harness and my browser profile untouched. <span class="c">1)</span> Remove the Chromium native-messaging host manifest <span class="p">~/.config/chromium/NativeMessagingHosts/com.deepseek.dsh.augmentor.json</span> (and the matching Edge, Brave, Opera, and Vivaldi paths if present). <span class="c">2)</span> Remove the <span class="p">@deepseek-ai/dsh-augmentor</span> plugin from my DSH profile. <span class="c">3)</span> Unload the Augmentor extension from the browser. Report exactly what you removed and confirm nothing else changed.
+          </div>
+          Prefer to do it by hand? Remove that native-host manifest, unload the extension, and delete the plugin — the plugin leaves DSH itself untouched.</div>
         </div>
       </div>
     </section>

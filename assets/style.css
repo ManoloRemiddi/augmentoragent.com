@@ -134,8 +134,8 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -0.02em;
   font-family: var(--font-sans);
 }
-.wordmark .light { font-weight: 300; color: #fff; }
-.wordmark .accent { font-weight: 700; color: #34d399; }
+.wordmark .light { font-weight: 700; color: #fff; }            /* "Augmentor Agent" — bold, primary */
+.wordmark .accent { font-weight: 400; color: #34d399; font-size: 0.8em; letter-spacing: 0.02em; } /* "powered by DSH" — smaller, lighter */
 
 .nav-links {
   flex: 1;
@@ -262,6 +262,24 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.8rem;
   color: var(--text-faint);
 }
+.hero-benefits {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+  max-width: 40rem;
+}
+.hero-benefits li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  color: var(--text-dim);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.hero-benefits li b { color: #fff; font-weight: 600; }
+.hero-benefits .tick { color: var(--color-primary); font-weight: 700; }
 
 /* ---------- Sections ---------- */
 .section { padding: 5rem 0; }
