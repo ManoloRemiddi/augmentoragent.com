@@ -355,9 +355,19 @@
       <div class="shell">
         <p class="step-num">INSTALL</p>
         <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
-        <p class="section-lead">Two halves: load the extension, then install the plugin. If you already run DSH, you’re 90% of the way there.</p>
+        <p class="section-lead">Two ways to install: do it by hand below, or copy one prompt and let your agent do it. If you already run DSH, you’re 90% of the way there.</p>
 
         <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and extension versions in step. Augmentor reads the installation version at handshake and surfaces a clear incompatibility if they drift.</div>
+
+        <!-- 0 · Prerequisite: DeepSeek Harness -->
+        <div class="glass-card install-col reveal" style="margin-bottom:1.5rem;">
+          <h3 class="color-primary" style="margin-top:0;">0 · Install DeepSeek Harness <span style="font-weight:400;color:var(--text-dim);font-size:0.95rem;">— only if you don’t have it</span></h3>
+          <p style="color:var(--text-mid);margin-bottom:1rem;">Augmentor is a plugin for DeepSeek Harness (DSH), so DSH is the runtime you need first. Get it from <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="color:#34d399;">github.com/deepseek-ai/deepseek-harness</a>.</p>
+          <div class="step"><span class="n">1</span><div>Install <strong style="color:#fff;">Node.js</strong> (v20+), then copy-paste into a terminal:</div></div>
+          <div class="code"><span class="p">npx</span> @deepseek-ai/dsh <span class="k">web</span></div>
+          <div class="step mt-6"><span class="n">2</span><div>DSH starts the web UI at <code class="mono">http://127.0.0.1:3080</code> and opens it in your browser. Once it’s up, come back and install Augmentor below.</div></div>
+          <p class="veil-caption mt-2">Run it from source instead: <code class="mono">git clone https://github.com/deepseek-ai/deepseek-harness.git &amp;&amp; cd deepseek-harness &amp;&amp; pnpm install &amp;&amp; pnpm run build &amp;&amp; pnpm dsh web</code></p>
+        </div>
 
         <div class="install-grid">
           <div class="glass-card install-col reveal">
@@ -377,6 +387,29 @@
             <div class="step"><span class="n">3</span><div>The plugin registers the <code class="mono">browser_*</code> tools and its own GUI card (connection status, endpoint, dedicated directory).</div></div>
             <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
           </div>
+        </div>
+
+        <!-- Automatic install -->
+        <div class="glass-card reveal" style="margin-top:1.5rem;">
+          <p class="step-num">OR · AUTOMATIC INSTALL</p>
+          <h3 class="section-head" style="font-size:1.5rem;margin-bottom:0.75rem;">Let your agent install it for you.</h3>
+          <p class="section-lead" style="max-width:42rem;margin:0 0 1.25rem;">Not in the mood to click around? Copy this prompt into the AI you already use — your DSH agent or any coding assistant. It installs DSH and Augmentor end-to-end and reports exactly what it did.</p>
+          <div class="code" style="white-space:pre-wrap;">You are installing Augmentor Agent (a DeepSeek Harness plugin + Chromium extension) on this machine. Work step by step; confirm each step and report what you did.
+
+1) Prereq — confirm Node.js 20+ and npm are installed (`node -v`, `npm -v`). If not, install Node.js.
+
+2) Install DeepSeek Harness if it isn't already running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
+
+3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the augmentor/extension/ folder in the Augmentor repo. Note the extension id.
+
+4) Install the native-messaging host: run `./install-native-host.sh &lt;extension-id&gt;` from the Augmentor repo.
+
+5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add @deepseek-ai/dsh-augmentor`.
+
+6) Open the Augmentor side panel, click Connect, pick a model, and send a test prompt to confirm it works.
+
+Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
+          <p class="veil-caption mt-2">Works in an Augmentor chat too — it has the <code class="mono">browser_*</code> tools to open <code class="mono">chrome://extensions</code> and do the web steps for you.</p>
         </div>
       </div>
     </section>
