@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Augmentor Agent · Architecture & Install · augmentoragent.com</title>
+  <meta name="description" content="The Augmentor architecture: a DeepSeek Harness plugin plus a Chromium extension connected by a loopback protocol pipe, and how to install it.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .doc-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; }
+    @media (max-width: 900px) { .doc-grid { grid-template-columns: 1fr; } }
+    .arch-box {
+      font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.7;
+      background: #050505; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px; padding: 1.2rem; overflow-x: auto; white-space: pre;
+      color: #b9c0c6;
+    }
+    .arch-box .g { color: #34d399; } .arch-box .y { color: #fde68a; } .arch-box .d { color: #6b7280; }
+    .h3sec { margin: 2.2rem 0 0.8rem; font-size: 1.4rem; font-weight: 600; }
+    .feature-tag { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-accent-1); }
+  </style>
+</head>
+<body class="bg-black text-zinc-100 antialiased overflow-x-hidden">
+
+  <div id="background-container">
+    <div class="background-base"></div>
+    <div class="gradient-orb gradient-orb-1"></div>
+    <div class="gradient-orb gradient-orb-2"></div>
+    <div class="gradient-orb gradient-orb-3"></div>
+    <div class="gradient-orb gradient-orb-4"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <div class="nav-wrap">
+        <div class="nav-row">
+          <a href="index.html" class="wordmark"><span class="light">Augmentor Agent</span> <span class="accent">powered by DSH</span></a>
+          <div class="nav-links">
+            <a href="index.html" class="nav-anchor">Home</a>
+            <a href="#arch" class="nav-anchor">Architecture</a>
+            <a href="#trust" class="nav-anchor">Trust fence</a>
+            <a href="#components" class="nav-anchor">Components</a>
+            <a href="#install" class="nav-anchor">Install</a>
+            <a href="#faq" class="nav-anchor">FAQ</a>
+          </div>
+          <a href="index.html#install" class="nav-cta">Get the extension</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="scroll-content">
+    <div class="shell" style="padding-top:7rem;padding-bottom:4rem;max-width:82rem;">
+      <p class="breadcrumb"><a href="index.html">Home</a> / Architecture &amp; Install</p>
+      <h1 class="section-head">Architecture &amp; install</h1>
+      <p class="section-lead">The honest, technical picture: two pieces, one loopback pipe, your DSH as the runtime. Nothing below requires modifying DeepSeek Harness.</p>
+
+      <!-- Architecture -->
+      <div id="arch" class="doc-grid" style="margin-top:1rem;">
+        <div class="glass-card reveal">
+          <p class="step-num">TARGET ARCHITECTURE</p>
+          <div class="arch-box"><span class="d">┌─ Chromium (MV3 extension) ─────────────────────────────┐</span>
+<span class="y">│ side panel</span> <span class="d">(chat UI, session picker, model picker, veil</span>
+<span class="d">│</span> <span class="y">│ controls)</span>
+<span class="d">│ service worker</span> <span class="y">= chat UI + browser executor</span>
+<span class="d">│ page overlay:</span> <span class="g">frost veil + status pill</span> <span class="d">(per tab)</span>
+<span class="d">└────────────────────────────┬──────────────────────────┘</span>
+<span class="d">                              │</span> <span class="g">chrome.runtime.connectNative</span>
+<span class="d">                              ▼</span>
+<span class="d">┌────────────────────────────▼──────────────────────────┐</span>
+<span class="d">│ Node helper</span> <span class="y">(repurposed bridge, the only process we own)</span>
+<span class="d">│ dumb protocol pipe: re-frames native port traffic as</span>
+<span class="d">│   ├─ POST /api/&lt;method&gt;</span> <span class="y">unary calls</span>
+<span class="d">│   ├─ WS /api/events.mux .host</span> <span class="y">downlink frames</span>
+<span class="d">│   └─ WS /api/augmentor</span> <span class="y">plugin action channel</span>
+<span class="d">└────────────────────────────┬──────────────────────────┘</span>
+<span class="d">                              │ loopback → passes trust fence</span>
+<span class="d">                              ▼</span>
+<span class="d">┌────────────────────────────▼──────────────────────────┐</span>
+<span class="d">│ DSH app, your running installation</span>
+<span class="d">│ @deepseek-ai/dsh-augmentor plugin</span> <span class="y">(cordis.patch.yml)</span>
+<span class="d">│   ├─ ctx.tools.register: browser_*</span>
+<span class="d">│   ├─ webServer route: WS /api/augmentor</span>
+<span class="d">│   └─ session lifecycle + settings card</span>
+<span class="d">│ stock: agent loop · session store · model catalog</span>
+<span class="d">│        approvals · /api + downlinks</span>
+<span class="d">└───────────────────────────────────────────────────────┘</span></div>
+        </div>
+
+        <div class="glass-card reveal">
+          <p class="step-num">WHY IT’S THIS SHAPE</p>
+          <ul class="arrow-list" style="margin-top:0.4rem;">
+            <li><span class="arrow">→</span><span>DSH already exposes every method the extension needs (<code class="mono">llm.models</code>, <code class="mono">session.create/list/history</code>, <code class="mono">session.selectModel</code>, <code class="mono">session.cancel</code>) over loopback <code class="mono">/api</code>.</span></li>
+            <li><span class="arrow">→</span><span>No second runtime: your DSH is the runtime, and the conversation is a real DSH session in the app’s own store.</span></li>
+            <li><span class="arrow">→</span><span>No patch: <code class="mono">session.interrupt</code> is retired in favour of stock <code class="mono">session.cancel</code> (Stop).</span></li>
+            <li><span class="arrow">→</span><span>The extension cannot dial <code class="mono">/api</code> directly (see the trust fence), so the native host is the pipe, and we already ship it.</span></li>
+          </ul>
+          <div class="callout" style="max-width:none;margin-top:1rem;"><strong>MVP conclusion:</strong> everything needed is stock DSH. The only optional later change is a small client tweak for deep-linking a chat from “Open in DSH”.</div>
+        </div>
+      </div>
+
+      <!-- Trust fence -->
+      <h2 id="trust" class="h3sec">The trust fence, settled</h2>
+      <p style="color:var(--text-mid);">DSH has a hardcoded defense (not config) that refuses browser-originated requests on its API. Understanding it is why the pipe exists.</p>
+      <div class="grid-3">
+        <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Host fence</h3><p>Host must be loopback (<code class="mono">127/8</code>, <code class="mono">::1</code>) or a declared trusted authority, applied to every request.</p></div>
+        <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Cross-site fence</h3><p><code class="mono">sec-fetch-site: cross-site</code> is refused. Browsers attach this metadata; a Node process never does.</p></div>
+        <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Origin fence</h3><p>If an <code class="mono">Origin</code> is present, its host must equal the Host’s. <code class="mono">chrome-extension://&lt;id&gt;</code> never equals <code class="mono">127.0.0.1:3080</code> → refused.</p></div>
+      </div>
+      <div class="glass-banner mt-10 reveal"><div class="banner-content">
+        <p style="color:var(--text-mid);">Consequence: the extension’s service worker fails checks 2 and 3 on every channel. So it talks through a small Node process on loopback, the native-messaging host we already ship, repurposed into a dumb protocol pipe: <code class="mono">SW ⇄ connectNative ⇄ Node helper ⇄ /api + downlinks + plugin WS</code>. Same topology as today, minus the second runtime.</p>
+      </div></div>
+
+      <!-- Components -->
+      <h2 id="components" class="h3sec">The pieces</h2>
+      <div class="glass-card reveal" style="overflow-x:auto;">
+        <table class="table">
+          <thead><tr><th>Piece</th><th>What it does</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">@deepseek-ai/dsh-augmentor</td><td>Registers the <code class="mono">browser_*</code> tools, hosts the <code class="mono">/api/augmentor</code> WebSocket, runs the session-lifecycle service and a GUI settings card.</td><td><span class="badge">new</span></td></tr>
+            <tr><td class="mono">bridge.mjs → protocol pipe</td><td>Repurposed native host: reframes port traffic as unary <code class="mono">/api</code> POSTs + downlink sockets. No more runtime spawn.</td><td><span class="badge">repurpose</span></td></tr>
+            <tr><td>MV3 extension</td><td>Side panel, browser executor, frost veil + status pill, model/session UI, approvals.</td><td><span class="badge">reuse</span></td></tr>
+            <tr><td class="mono">session / interrupt</td><td>Retired. Replaced by stock <code class="mono">session.cancel</code> for Stop.</td><td><span class="badge warn">removed</span></td></tr>
+            <tr><td class="mono">dsh-browser CLI + HTTP relay</td><td>Deleted. The tools call the extension in-process, no bash round-trip.</td><td><span class="badge warn">removed</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Install -->
+      <h2 id="install" class="h3sec">Install</h2>
+      <div class="doc-grid">
+        <div class="glass-card reveal">
+          <h3 class="color-primary" style="margin-top:0;">A · Extension</h3>
+          <ol class="arrow-list" style="margin-top:0.6rem;">
+            <li><span class="arrow">→</span><span><code class="mono">chrome://extensions</code> → Developer mode → <strong style="color:#fff;">Load unpacked</strong> → select <code class="mono">augmentor/extension/</code>.</span></li>
+            <li><span class="arrow">→</span><span>Note the extension id.</span></li>
+            <li><span class="arrow">→</span><span>Run <code class="mono">./install-native-host.sh &lt;extension-id&gt;</code> (launch Chromium from a shell where <code class="mono">node</code> resolves).</span></li>
+            <li><span class="arrow">→</span><span>Open the side panel → <strong style="color:#fff;">Connect</strong> → prompt it.</span></li>
+          </ol>
+        </div>
+        <div class="glass-card reveal">
+          <h3 class="color-secondary" style="margin-top:0;">B · Plugin</h3>
+          <ul class="arrow-list" style="margin-top:0.6rem;">
+            <li><span class="arrow">→</span><span>Install the package into your profile, or insert its row into <code class="mono">~/.dsh/cordis.patch.yml</code>.</span></li>
+            <li><span class="arrow">→</span><span>The app live-watches that file and mounts the plugin without a restart.</span></li>
+            <li><span class="arrow">→</span><span>The plugin’s GUI card shows connection status, endpoint, and the dedicated directory (default <code class="mono">~/Augmentor</code>).</span></li>
+            <li><span class="arrow">→</span><span>No DSH fork, no local patch.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <h2 id="faq" class="h3sec">FAQ</h2>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Two DSH installs on one machine: which does it attach to?</span><span class="chev">▾</span></button>
+        <div class="faq-a">One running app per port. An endpoint field in the extension options (default <code class="mono">http://127.0.0.1:3080</code>) selects it; the handshake tells the pipe which deployment it reached.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>What if the extension is disconnected mid-turn?</span><span class="chev">▾</span></button>
+        <div class="faq-a">The tool handler returns a readable “no browser client connected” result and never blocks the turn. Reconnect reopens the pipe and refetches the session baseline.</div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Is it published / on the store?</span><span class="chev">▾</span></button>
+        <div class="faq-a">Not yet. This is a preview build loaded unpacked. The plugin is installed locally (machine-level patch); publishing it upstream is a separate decision.</div>
+      </div>
+
+      <div class="glass-card cta-card reveal mt-10" style="margin-top:3rem;">
+        <h2>Ready to give your agent <span class="gradient-text">real hands?</span></h2>
+        <div class="flex-center" style="margin-top:1.2rem;">
+          <a href="index.html#install" class="btn btn-round">Get the extension</a>
+          <a href="index.html" class="btn btn-ghost">Back to the overview</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p class="wordmark"><span class="light">Augmentor Agent</span> <span class="accent">powered by DSH</span></p>
+      <p class="tag">Real browser control for DeepSeek Harness</p>
+      <p class="legal">© 2026 augmentoragent.com</p>
+    </footer>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+    });
+  </script>
+</body>
+</html>

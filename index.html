@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Augmentor Agent · real browser hands for DeepSeek Harness</title>
+  <meta name="description" content="Augmentor is a DeepSeek Harness plugin + Chromium extension that gives your agent control of your real browser with local or cloud models, behind a visible frost veil so you always see it working.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="bg-black text-zinc-100 antialiased overflow-x-hidden">
+
+  <div id="scroll-progress"></div>
+
+  <!-- Animated background atmosphere -->
+  <div id="background-container">
+    <div class="background-base"></div>
+    <div class="gradient-orb gradient-orb-1"></div>
+    <div class="gradient-orb gradient-orb-2"></div>
+    <div class="gradient-orb gradient-orb-3"></div>
+    <div class="gradient-orb gradient-orb-4"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <div class="nav-wrap">
+        <div class="nav-row">
+          <a href="#top" class="wordmark"><span class="light">Augmentor Agent</span> <span class="accent">powered by DSH</span></a>
+          <div class="nav-links">
+            <a href="#models" class="nav-anchor">Models</a>
+            <a href="#action" class="nav-anchor">In action</a>
+            <a href="#how" class="nav-anchor">How it works</a>
+            <a href="#features" class="nav-anchor">Features</a>
+            <a href="#veil" class="nav-anchor">The veil</a>
+            <a href="#install" class="nav-anchor">Install</a>
+            <a href="#faq" class="nav-anchor">FAQ</a>
+          </div>
+          <a href="#install" class="nav-cta">Get the extension</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="scroll-content">
+
+    <!-- Hero -->
+    <section id="top" class="hero">
+      <div class="hero-split">
+        <div class="hero-text">
+          <p class="kicker">DeepSeek Harness plugin · Chromium extension</p>
+          <h1>Give your DeepSeek Harness agent <span class="gradient-text">real browser hands.</span></h1>
+          <p class="sub">Augmentor mounts into the DSH you already run and lets your agent drive your real Chromium browser: navigate, snapshot, click, type. All behind a visible frost veil.</p>
+          <div class="hero-cta-row">
+            <a href="#install" class="btn btn-round">Add to Chromium</a>
+            <a href="#action" class="btn btn-ghost">See it in action</a>
+          </div>
+          <p class="hero-meta mt-6"><span class="hl">Local llama.cpp or DeepSeek cloud</span>. Your models, your choice. No second runtime · no fork · no DSH patch.</p>
+        </div>
+        <div class="hero-visual">
+          <div>
+            <div class="device-frame">
+              <div class="chrome">
+                <span class="dots"><span class="dot-c"></span><span class="dot-c"></span><span class="dot-c"></span></span>
+                <span class="url">chrome://extensions · Augmentor side panel</span>
+              </div>
+              <img class="shot shot-panel" src="assets/shot-panel.png" alt="Augmentor side panel in Chromium, connected, model Qwen3.8-27B (local)" loading="lazy">
+            </div>
+            <p class="device-cap"><span class="dot-live"></span>the real side panel · live in your browser</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Model marquee -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee-track">
+        <span class="m"><span class="tag local">local</span> Qwen3.8-27B</span>
+        <span class="m"><span class="tag local">local</span> Llama-3.1-8B</span>
+        <span class="m"><span class="tag local">local</span> any llama.cpp route</span>
+        <span class="m"><span class="tag cloud">cloud</span> deepseek-v4-flash</span>
+        <span class="m"><span class="tag cloud">cloud</span> deepseek-v4-pro</span>
+        <span class="m"><span class="tag cloud">cloud</span> deepseek-v4-flash-vision</span>
+        <span class="m">…whatever your DSH settings expose</span>
+      </div>
+    </div>
+
+    <!-- Models: local or cloud -->
+    <section id="models" class="section">
+      <div class="shell">
+        <div class="center">
+          <p class="step-num">MODELS</p>
+          <h2 class="section-head">Run it local. Run it cloud. <span class="gradient-text">Your call.</span></h2>
+          <p class="section-lead" style="margin-left:auto;margin-right:auto;">The panel’s model picker <em>is</em> the DSH catalog: the same <code class="mono">$DSH_HOME/settings.yaml</code> your app reads. Point Augmentor at a 27B on your own GPU or DeepSeek in the cloud, and switch per conversation. No per-route config, no restart.</p>
+        </div>
+
+        <div class="picker-mock reveal">
+          <div class="picker-chip">
+            <span>Qwen3.8-27B (local)</span>
+            <span style="display:flex;align-items:center;gap:.6rem;"><span class="k">switch anytime</span><span class="chev">▾</span></span>
+          </div>
+          <div class="picker-menu">
+            <div class="picker-group">
+              <div class="ghead"><span>Local · llama.cpp · your hardware</span><span class="badge">private · free</span></div>
+              <div class="picker-row sel"><span class="radio"></span> Qwen3.8-27B <span class="desc">Q6_K_XL</span><span class="check">✓</span></div>
+              <div class="picker-row"><span class="radio"></span> Llama-3.1-8B <span class="desc">instruct</span></div>
+              <div class="picker-row"><span class="radio"></span> any route you configure <span class="desc">settings.yaml</span></div>
+            </div>
+            <div class="picker-group">
+              <div class="ghead"><span>Cloud · DeepSeek</span><span class="badge warn">frontier · no hardware</span></div>
+              <div class="picker-row"><span class="radio"></span> deepseek-v4-flash <span class="desc">fast</span></div>
+              <div class="picker-row"><span class="radio"></span> deepseek-v4-pro <span class="desc">strongest</span></div>
+              <div class="picker-row"><span class="radio"></span> deepseek-v4-flash-vision <span class="desc">vision</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2 mt-10">
+          <div class="emergent-card reveal">
+            <h4 class="color-primary">Run it local</h4>
+            <p>Use the models already running on your machine through llama.cpp. Private, offline, and as free as your own hardware. Augmentor reads your local routes straight from DSH settings. Nothing extra to wire up.</p>
+          </div>
+          <div class="emergent-card reveal">
+            <h4 class="color-secondary">Run it cloud</h4>
+            <p>Flip to the built-in DeepSeek route for frontier models. No local GPU required. The key resolves per request from your DSH credential store, the same one the app’s Models page writes.</p>
+          </div>
+        </div>
+
+        <div class="glass-banner mt-10 reveal"><div class="banner-content center">
+          <p style="color:var(--text-dim);max-width:40rem;margin:0 auto;">Which models exist is <strong style="color:#fff;">your settings document, never Augmentor’s</strong>. That is what keeps the picker and the DSH app from ever drifting apart. Switching lands on the next turn; the session keeps its id and its context.</p>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- In action -->
+    <section id="action" class="section">
+      <div class="shell">
+        <p class="step-num">IN ACTION</p>
+        <h2 class="section-head">One prompt, <span class="gradient-text">one real tab.</span></h2>
+        <p class="section-lead">Here’s a turn. On the left, the conversation; on the right, the frost veil on the very tab the agent is driving. You see every step in plain words.</p>
+
+        <div class="install-grid">
+          <div class="turn-mock reveal">
+            <div class="tm-head"><span class="who">Augmentor · Augmentor Chat</span><span class="badge">Qwen3.8-27B · local</span></div>
+            <div class="turn-bubble user">Open example.com and tell me the exact title.</div>
+            <div class="turn-step done"><span class="s-dot"></span>Opened example.com</div>
+            <div class="turn-step active"><span class="s-dot"></span>Analysing the page…</div>
+            <div class="turn-bubble agent" id="agent-answer">The page title is <strong style="color:#fff;">“Example Domain”</strong>. It explains the domain is reserved for examples in documents.</div>
+          </div>
+          <div class="shot-frame reveal">
+            <div class="chrome">
+              <span class="dots"><span class="dot-c"></span><span class="dot-c"></span><span class="dot-c"></span></span>
+              <span class="url">https://example.com · agent is driving this tab</span>
+            </div>
+            <img src="assets/shot-veil.png" alt="The Augmentor frost veil over a browser tab with a status pill" loading="lazy">
+            <div class="shot-cap"><span class="t">The frost veil, live</span>Condenses in, breathes for the whole turn, and melts when the answer lands. The pill says exactly what’s happening, in plain words.</div>
+          </div>
+        </div>
+
+        <div class="badge-strip mt-10 reveal">
+          <span class="b"><span class="swatch" style="background:#34d399"></span>navigate</span>
+          <span class="b"><span class="swatch" style="background:#34d399"></span>snapshot</span>
+          <span class="b"><span class="swatch" style="background:#34d399"></span>click</span>
+          <span class="b"><span class="swatch" style="background:#34d399"></span>type</span>
+          <span class="b"><span class="swatch" style="background:#fb923c"></span>tabs_list</span>
+          <span class="b">→ ~200ms per action</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- What it is -->
+    <section id="what" class="section">
+      <div class="shell">
+        <div class="glass-banner reveal">
+          <div class="banner-content">
+            <p class="step-num">WHAT THIS IS</p>
+            <div class="section-head">Not a sidecar. Not another AI. <span class="gradient-text">Hands for the agent you have.</span></div>
+            <p style="color:var(--text-dim);font-size:1.1rem;">
+              Augmentor is made of two pieces that snap onto your existing DeepSeek Harness: a
+              <strong style="color:#fff;">plugin</strong> that registers five native
+              <code class="mono color-primary">browser_*</code> tools on the agent, and a
+              <strong style="color:#fff;">Chromium extension</strong> that drives your real browser
+              when those tools are called. There is no second DSH runtime and nothing to fork. Your
+              DSH <em>is</em> the runtime.
+            </p>
+            <ul class="arrow-list mt-10">
+              <li><span class="arrow">→</span><span><span class="color-primary font-semibold">Local or cloud, your choice.</span> The picker mirrors your DSH catalog (local llama.cpp or DeepSeek) and switches per conversation.</span></li>
+              <li><span class="arrow">→</span><span><span class="color-primary font-semibold">The page, not a guess.</span> The agent reads a real snapshot and uses real layout, so it stops inventing selectors.</span></li>
+              <li><span class="arrow">→</span><span><span class="color-primary font-semibold">Visible control.</span> Every action happens behind the frost veil with a plain-language status pill, so you always see when it’s working.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="section">
+      <div class="shell">
+        <p class="step-num">HOW IT WORKS</p>
+        <h2 class="section-head">Three little moving parts, <span class="gradient-text">one of them is yours.</span></h2>
+        <p class="section-lead">The extension talks to your running DSH through the native-messaging host. The whole path stays on loopback and reuses the transport you already trust.</p>
+
+        <div class="grid-3">
+          <div class="glass-card reveal">
+            <p class="step-num">01 · EXTENSION</p>
+            <h3 style="margin:0 0 .5rem;">Chromium side panel</h3>
+            <p style="color:var(--text-mid);">The chat UI, session + model picker, and the per-tab browser executor. It owns the frost veil and status pill.</p>
+          </div>
+          <div class="glass-card reveal">
+            <p class="step-num">02 · PROTOCOL PIPE</p>
+            <h3 style="margin:0 0 .5rem;">Native host</h3>
+            <p style="color:var(--text-mid);">A small loopback Node process re-frames the port traffic as <code class="mono">/api</code> calls + downlink sockets. This is the only process Augmentor owns.</p>
+          </div>
+          <div class="glass-card reveal">
+            <p class="step-num">03 · YOUR DSH</p>
+            <h3 style="margin:0 0 .5rem;">The running installation</h3>
+            <p style="color:var(--text-mid);">The <code class="mono">@deepseek-ai/dsh-augmentor</code> plugin registers the <code class="mono">browser_*</code> tools and bridges each to the extension. Everything else (model catalog, sessions, Stop) is stock DSH.</p>
+          </div>
+        </div>
+
+        <div class="glass-banner mt-10 reveal">
+          <div class="banner-content">
+            <div class="code">
+<span class="c"># the DSH plugin mounts via the machine-level patch (live-watched)</span>
+<span class="k">insert:</span> <span class="p">@deepseek-ai/dsh-augmentor</span>
+
+<span class="c"># the native host is installed once, pointed at the extension id</span>
+<span class="p">./install-native-host.sh</span> &lt;extension-id&gt;
+
+<span class="c"># model calls browser_navigate → plugin WS → extension → the real tab</span>
+<span class="k">browser_navigate</span>  <span class="hl">"https://example.com"</span>  <span class="c"># ~200ms round trip</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="section">
+      <div class="shell">
+        <p class="step-num">FEATURES</p>
+        <h2 class="section-head">Built for the DSH user, <span class="gradient-text">not around them.</span></h2>
+        <p class="section-lead">Everything below is stock DeepSeek Harness surfaced through the panel. No config you have to re-learn.</p>
+
+        <div class="grid-3">
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Local or cloud models</h4>
+            <p>The picker is your DSH catalog: local llama.cpp routes and the built-in DeepSeek route, exactly as configured. Switch per conversation, no restart.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Real browser tools</h4>
+            <p><code class="mono">browser_tabs_list</code>, <code class="mono">browser_navigate</code>, <code class="mono">browser_snapshot</code>, <code class="mono">browser_click</code>, <code class="mono">browser_type</code>, registered in-process on the agent. No bash round-trip, no CLI, no relay.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">DSH session parity</h4>
+            <p>Conversations are real DSH sessions (<code class="mono">session.create</code>), shown in the app sidebar, live in both places. Ephemeral by default, one tap to <strong style="color:#fff;">Save</strong> to <span class="color-primary">Augmentor Chat</span>.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Stop works</h4>
+            <p>Stock <code class="mono">session.cancel</code> aborts the live turn while preserving the pending inbox. No local DSH patch, no interrupt route to maintain.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Live streaming</h4>
+            <p>Replies render as they’re generated. The panel coalesces deltas per animation frame with a blinking caret, mirroring the DSH web GUI.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Open in DSH</h4>
+            <p>Jump from the panel straight into the running app with the right chat. Saved chats land in Augmentor Chat; the rest stay in Ungrouped, where housekeeping keeps them from piling up.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- The veil -->
+    <section id="veil" class="section">
+      <div class="shell">
+        <p class="step-num">THE FROST VEIL</p>
+        <h2 class="section-head">You always see <span class="gradient-text">when it’s working.</span></h2>
+        <p class="section-lead">Every tab the agent touches wears a visible marker. A WebGL frost sheet condenses in, breathes for the whole turn, and melts when the job is done. Move your mouse over it, and the light follows.</p>
+
+        <div class="veil-demo reveal" id="veil-demo">
+          <canvas id="veil-canvas"></canvas>
+          <div class="page-mock">
+            <p class="mock-title">example.com</p>
+            <div class="mock-line"></div>
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+          </div>
+          <div class="veil-pill"><span class="dot"></span><span class="pill-text">Thinking…</span></div>
+        </div>
+        <p class="veil-caption">live WebGL demo · pointer moves the light · reduced-motion gets the static fallback</p>
+
+        <div class="grid-3 mt-10">
+          <div class="emergent-card reveal">
+            <h4 class="color-primary">Condense → breathe → melt</h4>
+            <p>The indicator appears the moment the agent takes control and only leaves before the answer. It lives for the whole turn, never fading mid-action.</p>
+          </div>
+          <div class="emergent-card reveal">
+            <h4 class="color-secondary">Plain-language status</h4>
+            <p>“Checking open tabs…”, “Clicking…”, “Typed into the search box”. Element text, never selectors. Machine errors get translated too.</p>
+          </div>
+          <div class="emergent-card reveal">
+            <h4 class="color-primary">Never blocks the page</h4>
+            <p>Pointer-events pass through and the centre stays see-through, so you can keep reading while the agent works. No backdrop blur in the way.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases -->
+    <section id="uses" class="section">
+      <div class="shell">
+        <p class="step-num">WHAT IT’S FOR</p>
+        <h2 class="section-head">Hand it a task. <span class="gradient-text">It drives your tab.</span></h2>
+        <p class="section-lead">Whatever you’d do to a page by hand (navigate, read, click, type), your agent can do, on the model you point it at.</p>
+        <div class="grid-3">
+          <div class="card usecase reveal"><div class="ico">🧾</div><h4>Fill out forms</h4><p>“Log in and set these fields.” The agent types into the right boxes on the page you’re looking at, and you watch it happen.</p></div>
+          <div class="card usecase reveal"><div class="ico">🔎</div><h4>Read & extract</h4><p>“Summarise this page” or “grab the pricing table.” It snapshots real content, never inventing what isn’t there.</p></div>
+          <div class="card usecase reveal"><div class="ico">🔁</div><h4>Multi-step flows</h4><p>Search, open, compare, repeat. It keeps the conversation and your context across the whole flow, on one tab or several.</p></div>
+          <div class="card usecase reveal"><div class="ico">👁️</div><h4>Watch & check</h4><p>Point it at a page and ask it to check something. The veil stays up while it works, and melts when it reports back.</p></div>
+          <div class="card usecase reveal"><div class="ico">⚙️</div><h4>Your local stack</h4><p>Run it entirely on a local model: private, offline, no API bill. Or hop to the cloud for a harder task.</p></div>
+          <div class="card usecase reveal"><div class="ico">🗂️</div><h4>Keep or toss it</h4><p>Every chat is disposable by default. The one worth keeping? One tap files it into the Augmentor Chat workspace in DSH.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof / numbers -->
+    <section id="proof" class="section">
+      <div class="shell">
+        <div class="glass-card reveal">
+          <p class="step-num">MEASURED, NOT MARKETED</p>
+          <h2 class="section-head" style="margin-bottom:2rem;">Real Chromium, real numbers.</h2>
+          <div class="stats-grid">
+            <div class="stat"><div class="num"><span class="counter" data-to="200" data-pre="~" data-suf=" ms">0</span></div><div class="lbl">browser-action round trip</div></div>
+            <div class="stat"><div class="num"><span class="counter" data-to="98" data-suf="%">0</span></div><div class="lbl">prompt-cache hit</div></div>
+            <div class="stat"><div class="num"><span class="counter" data-to="17" data-suf="px">0</span></div><div class="lbl">streaming renders ≤ 50ms apart</div></div>
+            <div class="stat"><div class="num"><span class="counter" data-to="0" data-suf="">0</span></div><div class="lbl">patches to DeepSeek Harness</div></div>
+          </div>
+          <p class="veil-caption mt-6">"open example.com · snapshot · tell me the title" → prompt to idle in 3.42s on a local 27B model.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Install -->
+    <section id="install" class="section">
+      <div class="shell">
+        <p class="step-num">INSTALL</p>
+        <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
+        <p class="section-lead">Two halves: load the extension, then install the plugin. If you already run DSH, you’re 90% of the way there.</p>
+
+        <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and extension versions in step. Augmentor reads the installation version at handshake and surfaces a clear incompatibility if they drift.</div>
+
+        <div class="install-grid">
+          <div class="glass-card install-col reveal">
+            <h3 class="color-primary" style="margin-top:0;">A · The Chromium extension</h3>
+            <div class="step"><span class="n">1</span><div>Open <code class="mono">chrome://extensions</code>, turn on <strong style="color:#fff;">Developer mode</strong>.</div></div>
+            <div class="step"><span class="n">2</span><div><strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">augmentor/extension/</code> folder.</div></div>
+            <div class="step"><span class="n">3</span><div>Note the extension id, then install the native host:</div></div>
+            <div class="code"><span class="p">./install-native-host.sh</span> &lt;extension-id&gt;</div>
+            <div class="step mt-6"><span class="n">4</span><div>Open the side panel, hit <strong style="color:#fff;">Connect</strong>, pick a local or cloud model, and send a prompt.</div></div>
+          </div>
+
+          <div class="glass-card install-col reveal">
+            <h3 class="color-secondary" style="margin-top:0;">B · The DSH plugin</h3>
+            <div class="step"><span class="n">1</span><div>Install <code class="mono">@deepseek-ai/dsh-augmentor</code> into your profile.</div></div>
+            <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">@deepseek-ai/dsh-augmentor</span></div>
+            <div class="step mt-6"><span class="n">2</span><div>The package auto-joins the layer stack; or insert its row into <code class="mono">~/.dsh/cordis.patch.yml</code>. The app <em>live-watches</em> that file and mounts the plugin without a restart.</div></div>
+            <div class="step"><span class="n">3</span><div>The plugin registers the <code class="mono">browser_*</code> tools and its own GUI card (connection status, endpoint, dedicated directory).</div></div>
+            <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="shell">
+        <p class="step-num">FAQ</p>
+        <h2 class="section-head">Good questions, <span class="gradient-text">straight answers.</span></h2>
+
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Can I use local and cloud models together?</span><span class="chev">▾</span></button>
+          <div class="faq-a">Yes. The picker lists whatever your DSH settings expose: local llama.cpp routes and the built-in DeepSeek cloud route. Start on a local model, switch to a cloud one mid-project, and back again. Each switch keeps the session’s id and context; the next reply comes from the new model.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Does Augmentor ship its own AI / runtime?</span><span class="chev">▾</span></button>
+          <div class="faq-a">No. It’s a plugin on the DSH you already run plus a Chromium extension. Your DSH is the runtime, and the conversation is a real DSH session in the app’s own store.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Which browsers and models work?</span><span class="chev">▾</span></button>
+          <div class="faq-a">Chromium-based browsers (Chrome, Chromium, and MV3 builds). Models are whatever your DSH settings define. No route is hand-declared in Augmentor, so it can never drift from the app. For cloud, the DeepSeek key comes from your DSH credential store.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Is this safe? What can it reach?</span><span class="chev">▾</span></button>
+          <div class="faq-a">The extension talks to DSH only through the loopback native-messaging host, and the plugin’s own browser-action channel carries a generated token so arbitrary local processes can’t drive it. The agent targets the tab you’re looking at, and you see every action behind the veil.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>Are conversations kept?</span><span class="chev">▾</span></button>
+          <div class="faq-a">They start disposable (Ungrouped), like a research chat. One tap on Save promotes the chat into the <span class="color-primary">Augmentor Chat</span> workspace; a housekeeping sweep archives stale unattached chats so the list never piles up.</div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span>How do I uninstall?</span><span class="chev">▾</span></button>
+          <div class="faq-a">Remove the native-host manifest (<code class="mono">~/.config/chromium/NativeMessagingHosts/com.deepseek.dsh.augmentor.json</code>) and the repo-side Augmentor files, then unload the extension. The plugin leaves DSH untouched.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="cta" class="section">
+      <div class="shell">
+        <div class="glass-card cta-card reveal">
+          <h2>Give your agent <span class="gradient-text">real hands.</span></h2>
+          <p class="text-mid" style="color:var(--text-dim);font-size:1.15rem;max-width:40rem;margin:0 auto 2rem;">If you already run DeepSeek Harness with local or cloud models, you’re minutes away from browser control you can actually see.</p>
+          <div class="flex-center">
+            <a href="#install" class="btn btn-round">Get the extension</a>
+            <a href="docs.html" class="btn btn-ghost">Read the architecture</a>
+          </div>
+          <p class="veil-caption mt-10">Preview build · not yet on the store · load it unpacked from the repo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p class="wordmark"><span class="light">Augmentor Agent</span> <span class="accent">powered by DSH</span></p>
+      <p class="tag">Real browser control for DeepSeek Harness · local or cloud</p>
+      <p class="legal">© 2026 augmentoragent.com</p>
+    </footer>
+  </div>
+
+  <script src="assets/veil-demo.js"></script>
+  <script>
+    // Duplicate marquee content for a seamless loop
+    const mt = document.getElementById('marquee-track');
+    if (mt) mt.innerHTML += mt.innerHTML;
+
+    // Scroll progress bar
+    const sp = document.getElementById('scroll-progress');
+    const onScrollProg = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      sp.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+    };
+    window.addEventListener('scroll', onScrollProg, { passive: true });
+    onScrollProg();
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Animated counters
+    const counters = document.querySelectorAll('.counter');
+    const cObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const to = Number(el.dataset.to || 0);
+        const pre = el.dataset.pre || '', suf = el.dataset.suf || '';
+        const dur = 1400, t0 = performance.now();
+        const tick = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = pre + Math.round(to * eased) + suf;
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+        cObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => cObs.observe(c));
+
+    // "Analysing the page" agent answer reveal (type-in feel)
+    const answer = document.getElementById('agent-answer');
+    if (answer) {
+      const final = answer.innerHTML;
+      const aObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          answer.style.opacity = '0';
+          setTimeout(() => { answer.style.transition = 'opacity .6s'; answer.style.opacity = '1'; }, 350);
+          aObs.unobserve(e.target);
+        });
+      }, { threshold: 0.6 });
+      aObs.observe(answer);
+    }
+
+    // FAQ accordions
+    document.querySelectorAll('.faq-q').forEach(q => {
+      q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+    });
+
+    // Active nav anchor
+    const navAnchors = document.querySelectorAll('.nav-anchor');
+    const sections = [...document.querySelectorAll('section[id]')].filter(s => s.id !== 'top');
+    const onScroll = () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+      navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
