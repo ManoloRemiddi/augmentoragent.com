@@ -60,7 +60,7 @@
             <a href="#action" class="btn btn-ghost">See it in action</a>
           </div>
           <ul class="hero-benefits">
-            <li><span class="tick">✓</span><span><b>It does the clicking and typing.</b> Navigate, read, fill forms, extract, and step through multi-tab flows in your real browser.</span></li>
+            <li><span class="tick">✓</span><span><b>It does the clicking and typing.</b> Navigate, read, fill forms, extract, and step through multi-tab flows — in the tab you’re actually looking at, every single turn.</span></li>
             <li><span class="tick">✓</span><span><b>Your models, your call.</b> Run it on a local llama.cpp model for privacy and free, or DeepSeek in the cloud — switch per conversation.</span></li>
             <li><span class="tick">✓</span><span><b>You can trust it.</b> A frost veil sits over the tab it’s driving and tells you in plain words what it’s doing, then melts.</span></li>
           </ul>
@@ -71,9 +71,9 @@
             <div class="device-frame">
               <div class="chrome">
                 <span class="dots"><span class="dot-c"></span><span class="dot-c"></span><span class="dot-c"></span></span>
-                <span class="url">chrome://extensions · Augmentor side panel</span>
+                <span class="url">Augmentor · side panel, live in your browser</span>
               </div>
-              <img class="shot shot-panel" src="assets/shot-panel.png" alt="Augmentor side panel in Chromium, connected, model Qwen3.8-27B (local)" loading="lazy">
+              <img class="shot shot-panel" src="assets/shot-panel.png" alt="Augmentor side panel in Chromium — a live chat on the local Qwen3.8-27B model, with the model chip and site link in the dock" loading="lazy">
             </div>
             <p class="device-cap"><span class="dot-live"></span>the real side panel · live in your browser</p>
           </div>
@@ -84,8 +84,8 @@
     <!-- Model marquee -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track" id="marquee-track">
-        <span class="m"><span class="tag local">local</span> Qwen3.8-27B</span>
-        <span class="m"><span class="tag local">local</span> Llama-3.1-8B</span>
+        <span class="m"><span class="tag local">local</span> Qwen3.8-27B Q6_K_XL</span>
+        <span class="m"><span class="tag local">local</span> Qwen3.8-27B-NVFP4</span>
         <span class="m"><span class="tag local">local</span> any llama.cpp route</span>
         <span class="m"><span class="tag cloud">cloud</span> deepseek-v4-flash</span>
         <span class="m"><span class="tag cloud">cloud</span> deepseek-v4-pro</span>
@@ -105,14 +105,14 @@
 
         <div class="picker-mock reveal">
           <div class="picker-chip">
-            <span>Qwen3.8-27B (local)</span>
+            <span>Qwen3.8-27B Q6_K_XL · local</span>
             <span style="display:flex;align-items:center;gap:.6rem;"><span class="k">switch anytime</span><span class="chev">▾</span></span>
           </div>
           <div class="picker-menu">
             <div class="picker-group">
               <div class="ghead"><span>Local · llama.cpp · your hardware</span><span class="badge">private · free</span></div>
-              <div class="picker-row sel"><span class="radio"></span> Qwen3.8-27B <span class="desc">Q6_K_XL</span><span class="check">✓</span></div>
-              <div class="picker-row"><span class="radio"></span> Llama-3.1-8B <span class="desc">instruct</span></div>
+              <div class="picker-row sel"><span class="radio"></span> Qwen3.8-27B Q6_K_XL <span class="desc">local GPU</span><span class="check">✓</span></div>
+              <div class="picker-row"><span class="radio"></span> Qwen3.8-27B-NVFP4 <span class="desc">GX10</span></div>
               <div class="picker-row"><span class="radio"></span> any route you configure <span class="desc">settings.yaml</span></div>
             </div>
             <div class="picker-group">
@@ -223,15 +223,15 @@
           <div class="glass-card reveal">
             <p class="step-num">03 · YOUR DSH</p>
             <h3 style="margin:0 0 .5rem;">The running installation</h3>
-            <p style="color:var(--text-mid);">The <code class="mono">@deepseek-ai/dsh-augmentor</code> plugin registers the <code class="mono">browser_*</code> tools and bridges each to the extension. Everything else (model catalog, sessions, Stop) is stock DSH.</p>
+            <p style="color:var(--text-mid);">The <code class="mono">dsh-augmentor</code> plugin registers the five <code class="mono">browser_*</code> tools and its <code class="mono">/api/augmentor</code> handshake route. Everything else (model catalog, sessions, Stop) is stock DSH.</p>
           </div>
         </div>
 
         <div class="glass-banner mt-10 reveal">
           <div class="banner-content">
             <div class="code">
-<span class="c"># the DSH plugin mounts via the machine-level patch (live-watched)</span>
-<span class="k">insert:</span> <span class="p">@deepseek-ai/dsh-augmentor</span>
+<span class="c"># the DSH plugin joins the profile's layer stack (live-watched)</span>
+<span class="k">insert:</span> <span class="p">dsh-augmentor</span>
 
 <span class="c"># the native host is installed once, pointed at the extension id</span>
 <span class="p">./install-native-host.sh</span> &lt;extension-id&gt;
@@ -275,6 +275,14 @@
           <div class="component-card reveal">
             <h4 class="color-secondary">Open in DSH</h4>
             <p>Jump from the panel straight into the running app with the right chat. Saved chats land in Augmentor Chat; the rest stay in Ungrouped, where housekeeping keeps them from piling up.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Tab-aware</h4>
+            <p>Every turn starts on the tab you’re actually looking at, and stays there for the duration of the turn — so a multi-step sequence never hops under the agent’s feet.</p>
+          </div>
+          <div class="component-card reveal">
+            <h4 class="color-secondary">Browse past chats</h4>
+            <p>The sessions button lists your latest twenty Augmentor chats; click one and the full conversation re-renders, assistant prose and all.</p>
           </div>
         </div>
       </div>
@@ -357,7 +365,7 @@
         <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
         <p class="section-lead">Two ways to install: do it by hand below, or copy one prompt and let your agent do it. If you already run DSH, you’re 90% of the way there.</p>
 
-        <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and extension versions in step. Augmentor reads the installation version at handshake and surfaces a clear incompatibility if they drift.</div>
+        <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and extension versions in step. The pipe’s handshake reports exactly which DSH version it reached (in the pipe’s log), so a drift is easy to spot.</div>
 
         <!-- 0 · Prerequisite: DeepSeek Harness -->
         <div class="glass-card install-col reveal" style="margin-bottom:1.5rem;">
@@ -376,15 +384,15 @@
             <div class="step"><span class="n">2</span><div><strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">augmentor/extension/</code> folder.</div></div>
             <div class="step"><span class="n">3</span><div>Note the extension id, then install the native host:</div></div>
             <div class="code"><span class="p">./install-native-host.sh</span> &lt;extension-id&gt;</div>
-            <div class="step mt-6"><span class="n">4</span><div>Open the side panel, hit <strong style="color:#fff;">Connect</strong>, pick a local or cloud model, and send a prompt.</div></div>
+            <div class="step mt-6"><span class="n">4</span><div>Open the side panel — it connects automatically. Pick a model if you like, and send a prompt.</div></div>
           </div>
 
           <div class="glass-card install-col reveal">
             <h3 class="color-secondary" style="margin-top:0;">B · The DSH plugin</h3>
-            <div class="step"><span class="n">1</span><div>Install <code class="mono">@deepseek-ai/dsh-augmentor</code> into your profile.</div></div>
-            <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">@deepseek-ai/dsh-augmentor</span></div>
-            <div class="step mt-6"><span class="n">2</span><div>The package auto-joins the layer stack; or insert its row into <code class="mono">~/.dsh/cordis.patch.yml</code>. The app <em>live-watches</em> that file and mounts the plugin without a restart.</div></div>
-            <div class="step"><span class="n">3</span><div>The plugin registers the <code class="mono">browser_*</code> tools and its own GUI card (connection status, endpoint, dedicated directory).</div></div>
+            <div class="step"><span class="n">1</span><div>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a>, then install its <code class="mono">plugin/</code> package into your profile:</div></div>
+            <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">&lt;repo&gt;/plugin</span></div>
+            <div class="step mt-6"><span class="n">2</span><div>It declares a <code class="mono">dsh.bundle</code> patch, so it joins the profile’s layer stack automatically. The app <em>live-watches</em> the stack and mounts the plugin without a restart.</div></div>
+            <div class="step"><span class="n">3</span><div>The plugin registers the five <code class="mono">browser_*</code> tools and its <code class="mono">/api/augmentor</code> handshake route — the thing the extension’s pipe talks to. Its GUI card shows connection status, endpoint, and the chat directory.</div></div>
             <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
           </div>
         </div>
@@ -400,16 +408,16 @@
 
 2) Install DeepSeek Harness if it isn't already running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
 
-3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the augmentor/extension/ folder in the Augmentor repo. Note the extension id.
+3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the extension/ folder of the Augmentor repo (clone it first: https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin). Note the extension id.
 
 4) Install the native-messaging host: run `./install-native-host.sh &lt;extension-id&gt;` from the Augmentor repo.
 
-5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add @deepseek-ai/dsh-augmentor`.
+5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin`.
 
-6) Open the Augmentor side panel, click Connect, pick a model, and send a test prompt to confirm it works.
+6) Open the Augmentor side panel — it connects on its own — pick a model, and send a test prompt to confirm it works.
 
 Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
-          <p class="veil-caption mt-2">Works in an Augmentor chat too — it has the <code class="mono">browser_*</code> tools to open <code class="mono">chrome://extensions</code> and do the web steps for you.</p>
+          <p class="veil-caption mt-2">The extension id sits on the extension’s card in <code class="mono">chrome://extensions</code> — copy it from there. (Internal chrome:// pages are beyond the veil’s reach, so those clicks stay yours.)</p>
         </div>
       </div>
     </section>
@@ -444,7 +452,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
           <button class="faq-q"><span>How do I uninstall?</span><span class="chev">▾</span></button>
           <div class="faq-a">Give this prompt to your DSH (paste it into an Augmentor chat) and it will uninstall it for you:
           <div class="code" style="margin:1rem 0;">
-<span class="k">Uninstall</span> the <span class="p">Augmentor Agent</span> plugin and extension on this machine, but leave DeepSeek Harness and my browser profile untouched. <span class="c">1)</span> Remove the Chromium native-messaging host manifest <span class="p">~/.config/chromium/NativeMessagingHosts/com.deepseek.dsh.augmentor.json</span> (and the matching Edge, Brave, Opera, and Vivaldi paths if present). <span class="c">2)</span> Remove the <span class="p">@deepseek-ai/dsh-augmentor</span> plugin from my DSH profile. <span class="c">3)</span> Unload the Augmentor extension from the browser. Report exactly what you removed and confirm nothing else changed.
+<span class="k">Uninstall</span> the <span class="p">Augmentor Agent</span> plugin and extension on this machine, but leave DeepSeek Harness and my browser profile untouched. <span class="c">1)</span> Remove the Chromium native-messaging host manifest <span class="p">~/.config/chromium/NativeMessagingHosts/com.deepseek.dsh.augmentor.json</span> (and the matching Edge, Brave, Opera, and Vivaldi paths if present). <span class="c">2)</span> Remove the <span class="p">dsh-augmentor</span> plugin from my DSH profile. <span class="c">3)</span> Unload the Augmentor extension from the browser. Report exactly what you removed and confirm nothing else changed.
           </div>
           Prefer to do it by hand? Remove that native-host manifest, unload the extension, and delete the plugin — the plugin leaves DSH itself untouched.</div>
         </div>
@@ -461,7 +469,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
             <a href="#install" class="btn btn-round">Get the extension</a>
             <a href="docs.html" class="btn btn-ghost">Read the architecture</a>
           </div>
-          <p class="veil-caption mt-10">Preview build · not yet on the store · load it unpacked from the repo.</p>
+          <p class="veil-caption mt-10">v0.1.25 · preview build · not yet on the store · load it unpacked from the repo.</p>
         </div>
       </div>
     </section>

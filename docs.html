@@ -63,9 +63,9 @@
       <!-- Architecture -->
       <div id="arch" class="doc-grid" style="margin-top:1rem;">
         <div class="glass-card reveal">
-          <p class="step-num">TARGET ARCHITECTURE</p>
+          <p class="step-num">ARCHITECTURE</p>
           <div class="arch-box"><span class="d">┌─ Chromium (MV3 extension) ─────────────────────────────┐</span>
-<span class="y">│ side panel</span> <span class="d">(chat UI, session picker, model picker, veil</span>
+<span class="y">│ side panel</span> <span class="d">(chat UI, session browser, model picker, veil</span>
 <span class="d">│</span> <span class="y">│ controls)</span>
 <span class="d">│ service worker</span> <span class="y">= chat UI + browser executor</span>
 <span class="d">│ page overlay:</span> <span class="g">frost veil + status pill</span> <span class="d">(per tab)</span>
@@ -73,7 +73,7 @@
 <span class="d">                              │</span> <span class="g">chrome.runtime.connectNative</span>
 <span class="d">                              ▼</span>
 <span class="d">┌────────────────────────────▼──────────────────────────┐</span>
-<span class="d">│ Node helper</span> <span class="y">(repurposed bridge, the only process we own)</span>
+<span class="d">│ Node helper — pipe.mjs</span> <span class="y">(the only process we own)</span>
 <span class="d">│ dumb protocol pipe: re-frames native port traffic as</span>
 <span class="d">│   ├─ POST /api/&lt;method&gt;</span> <span class="y">unary calls</span>
 <span class="d">│   ├─ WS /api/events.mux .host</span> <span class="y">downlink frames</span>
@@ -83,7 +83,7 @@
 <span class="d">                              ▼</span>
 <span class="d">┌────────────────────────────▼──────────────────────────┐</span>
 <span class="d">│ DSH app, your running installation</span>
-<span class="d">│ @deepseek-ai/dsh-augmentor plugin</span> <span class="y">(cordis.patch.yml)</span>
+<span class="d">│ dsh-augmentor plugin</span> <span class="y">(profile bundle stack)</span>
 <span class="d">│   ├─ ctx.tools.register: browser_*</span>
 <span class="d">│   ├─ webServer route: WS /api/augmentor</span>
 <span class="d">│   └─ session lifecycle + settings card</span>
@@ -95,12 +95,12 @@
         <div class="glass-card reveal">
           <p class="step-num">WHY IT’S THIS SHAPE</p>
           <ul class="arrow-list" style="margin-top:0.4rem;">
-            <li><span class="arrow">→</span><span>DSH already exposes every method the extension needs (<code class="mono">llm.models</code>, <code class="mono">session.create/list/history</code>, <code class="mono">session.selectModel</code>, <code class="mono">session.cancel</code>) over loopback <code class="mono">/api</code>.</span></li>
+            <li><span class="arrow">→</span><span>DSH already exposes every method the extension needs (the model catalog, <code class="mono">session.create/list/history</code>, <code class="mono">session.selectModel</code>, <code class="mono">session.cancel</code>) over loopback <code class="mono">/api</code>.</span></li>
             <li><span class="arrow">→</span><span>No second runtime: your DSH is the runtime, and the conversation is a real DSH session in the app’s own store.</span></li>
             <li><span class="arrow">→</span><span>No patch: <code class="mono">session.interrupt</code> is retired in favour of stock <code class="mono">session.cancel</code> (Stop).</span></li>
             <li><span class="arrow">→</span><span>The extension cannot dial <code class="mono">/api</code> directly (see the trust fence), so the native host is the pipe, and we already ship it.</span></li>
           </ul>
-          <div class="callout" style="max-width:none;margin-top:1rem;"><strong>MVP conclusion:</strong> everything needed is stock DSH. The only optional later change is a small client tweak for deep-linking a chat from “Open in DSH”.</div>
+          <div class="callout" style="max-width:none;margin-top:1rem;"><strong>The shape holds:</strong> everything needed is stock DSH. The pipe stays a dumb loopback wire (a few hundred lines of <code class="mono">pipe.mjs</code>); everything smart lives in the extension and the plugin.</div>
         </div>
       </div>
 
@@ -113,7 +113,7 @@
         <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Origin fence</h3><p>If an <code class="mono">Origin</code> is present, its host must equal the Host’s. <code class="mono">chrome-extension://&lt;id&gt;</code> never equals <code class="mono">127.0.0.1:3080</code> → refused.</p></div>
       </div>
       <div class="glass-banner mt-10 reveal"><div class="banner-content">
-        <p style="color:var(--text-mid);">Consequence: the extension’s service worker fails checks 2 and 3 on every channel. So it talks through a small Node process on loopback, the native-messaging host we already ship, repurposed into a dumb protocol pipe: <code class="mono">SW ⇄ connectNative ⇄ Node helper ⇄ /api + downlinks + plugin WS</code>. Same topology as today, minus the second runtime.</p>
+        <p style="color:var(--text-mid);">Consequence: the extension’s service worker fails checks 2 and 3 on every channel. So it talks through a small Node process on loopback, the native-messaging host we ship, a dumb protocol pipe (<code class="mono">pipe.mjs</code>): <code class="mono">SW ⇄ connectNative ⇄ Node helper ⇄ /api + downlinks + plugin WS</code>. No second runtime anywhere.</p>
       </div></div>
 
       <!-- Components -->
@@ -122,11 +122,10 @@
         <table class="table">
           <thead><tr><th>Piece</th><th>What it does</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td class="mono">@deepseek-ai/dsh-augmentor</td><td>Registers the <code class="mono">browser_*</code> tools, hosts the <code class="mono">/api/augmentor</code> WebSocket, runs the session-lifecycle service and a GUI settings card.</td><td><span class="badge">new</span></td></tr>
-            <tr><td class="mono">bridge.mjs → protocol pipe</td><td>Repurposed native host: reframes port traffic as unary <code class="mono">/api</code> POSTs + downlink sockets. No more runtime spawn.</td><td><span class="badge">repurpose</span></td></tr>
-            <tr><td>MV3 extension</td><td>Side panel, browser executor, frost veil + status pill, model/session UI, approvals.</td><td><span class="badge">reuse</span></td></tr>
-            <tr><td class="mono">session / interrupt</td><td>Retired. Replaced by stock <code class="mono">session.cancel</code> for Stop.</td><td><span class="badge warn">removed</span></td></tr>
-            <tr><td class="mono">dsh-browser CLI + HTTP relay</td><td>Deleted. The tools call the extension in-process, no bash round-trip.</td><td><span class="badge warn">removed</span></td></tr>
+            <tr><td class="mono">dsh-augmentor (plugin/)</td><td>Registers the five <code class="mono">browser_*</code> tools, hosts the <code class="mono">/api/augmentor</code> WebSocket, runs the session-lifecycle service and a GUI settings card.</td><td><span class="badge">shipped</span></td></tr>
+            <tr><td class="mono">pipe.mjs</td><td>The native host: reframes port traffic as unary <code class="mono">/api</code> POSTs + downlink sockets. The only process Augmentor owns; no runtime spawn.</td><td><span class="badge">shipped</span></td></tr>
+            <tr><td>MV3 extension</td><td>Side panel, browser executor, frost veil + status pill, model/session UI, tab-aware work tab, Browse list.</td><td><span class="badge">shipped</span></td></tr>
+            <tr><td class="mono">M0 sidecar (local DSH clone + dsh-browser CLI)</td><td>Superseded: the M0 design ran a private DSH clone with its own interrupt route. It no longer exists in the code.</td><td><span class="badge warn">retired</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -149,15 +148,15 @@
             <li><span class="arrow">→</span><span><code class="mono">chrome://extensions</code> → Developer mode → <strong style="color:#fff;">Load unpacked</strong> → select <code class="mono">augmentor/extension/</code>.</span></li>
             <li><span class="arrow">→</span><span>Note the extension id.</span></li>
             <li><span class="arrow">→</span><span>Run <code class="mono">./install-native-host.sh &lt;extension-id&gt;</code> (launch Chromium from a shell where <code class="mono">node</code> resolves).</span></li>
-            <li><span class="arrow">→</span><span>Open the side panel → <strong style="color:#fff;">Connect</strong> → prompt it.</span></li>
+            <li><span class="arrow">→</span><span>Open the side panel — it connects automatically — and prompt it.</span></li>
           </ol>
         </div>
         <div class="glass-card reveal">
           <h3 class="color-secondary" style="margin-top:0;">B · Plugin</h3>
           <ul class="arrow-list" style="margin-top:0.6rem;">
-            <li><span class="arrow">→</span><span>Install the package into your profile, or insert its row into <code class="mono">~/.dsh/cordis.patch.yml</code>.</span></li>
-            <li><span class="arrow">→</span><span>The app live-watches that file and mounts the plugin without a restart.</span></li>
-            <li><span class="arrow">→</span><span>The plugin’s GUI card shows connection status, endpoint, and the dedicated directory (default <code class="mono">~/Augmentor</code>).</span></li>
+            <li><span class="arrow">→</span><span>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a> and install the package: <code class="mono">dsh plugin --profile &lt;name&gt; add &lt;repo&gt;/plugin</code>.</span></li>
+            <li><span class="arrow">→</span><span>It declares a <code class="mono">dsh.bundle</code> patch, so it joins the profile’s layer stack automatically; the app live-watches the stack and mounts the plugin without a restart.</span></li>
+            <li><span class="arrow">→</span><span>The plugin’s GUI card shows connection status, endpoint, and the chat directory (default <code class="mono">~/Augmentor</code>).</span></li>
             <li><span class="arrow">→</span><span>No DSH fork, no local patch.</span></li>
           </ul>
         </div>
@@ -173,13 +172,13 @@
 
 2) Install DeepSeek Harness if it isn't already running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
 
-3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the augmentor/extension/ folder in the Augmentor repo. Note the extension id.
+3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the extension/ folder of the Augmentor repo (clone it first: https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin). Note the extension id.
 
 4) Install the native-messaging host: run `./install-native-host.sh &lt;extension-id&gt;` from the Augmentor repo.
 
-5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add @deepseek-ai/dsh-augmentor`.
+5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin`.
 
-6) Open the Augmentor side panel, click Connect, pick a model, and send a test prompt to confirm it works.
+6) Open the Augmentor side panel — it connects on its own — pick a model, and send a test prompt to confirm it works.
 
 Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
       </div>
@@ -188,7 +187,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
       <h2 id="faq" class="h3sec">FAQ</h2>
       <div class="faq-item reveal">
         <button class="faq-q"><span>Two DSH installs on one machine: which does it attach to?</span><span class="chev">▾</span></button>
-        <div class="faq-a">One running app per port. An endpoint field in the extension options (default <code class="mono">http://127.0.0.1:3080</code>) selects it; the handshake tells the pipe which deployment it reached.</div>
+        <div class="faq-a">One running app per port. The pipe dials <code class="mono">$DSH_AUGMENTOR_URL</code> (default <code class="mono">http://127.0.0.1:3080</code>, settable in the repo’s <code class="mono">.env</code>); the handshake reports which deployment it reached, and the panel’s “Open in DSH” follows the same endpoint.</div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q"><span>What if the extension is disconnected mid-turn?</span><span class="chev">▾</span></button>
@@ -196,7 +195,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
       </div>
       <div class="faq-item reveal">
         <button class="faq-q"><span>Is it published / on the store?</span><span class="chev">▾</span></button>
-        <div class="faq-a">Not yet. This is a preview build loaded unpacked. The plugin is installed locally (machine-level patch); publishing it upstream is a separate decision.</div>
+        <div class="faq-a">Not yet. This is a v0.1.25 preview build loaded unpacked. The plugin installs into your DSH profile’s bundle stack; publishing the extension to a store is a separate decision.</div>
       </div>
 
       <div class="glass-card cta-card reveal mt-10" style="margin-top:3rem;">

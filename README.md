@@ -4,8 +4,9 @@ Official website for **Augmentor Agent** — real browser hands for DeepSeek Har
 Published with **GitHub Pages** from the `main` branch (repo root), served at
 <https://augmentoragent.com>.
 
-Two pieces: a DeepSeek Harness plugin (`@deepseek-ai/dsh-augmentor`) plus a
-Chromium extension that drives your real browser behind a visible frost veil.
+Two pieces: a DeepSeek Harness plugin (`dsh-augmentor`, installed from the
+Augmentor repo's `plugin/` package) plus a Chromium extension that drives your
+real browser behind a visible frost veil.
 
 ## Repo layout
 
