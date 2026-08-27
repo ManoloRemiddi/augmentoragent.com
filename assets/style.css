@@ -166,8 +166,17 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-cta:hover { background: var(--color-primary); }
 
+/* ---------- Nav social icons ---------- */
+.nav-social { flex: none; display: flex; align-items: center; gap: 0.7rem; }
+.nav-social a { display: grid; place-items: center; color: var(--text-dim); transition: color 0.2s ease; }
+.nav-social a svg { width: 17px; height: 17px; fill: currentColor; }
+.nav-social .soc-discord:hover { color: #5865f2; }
+.nav-social .soc-youtube:hover { color: #ff0033; }
+.nav-social .soc-github:hover { color: #f4f4f5; }
+
 @media (max-width: 860px) {
   .nav-links { display: none; }
+  .nav-social { display: none; } /* keep the mobile row: wordmark + CTA only */
 }
 
 /* ---------- Layout ---------- */
