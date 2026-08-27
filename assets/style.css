@@ -654,7 +654,7 @@ footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem
 .hero { min-height: 90vh; padding: 7.5rem 1.5rem 4rem; }
 .hero-split {
   display: grid; grid-template-columns: 1.06fr 0.94fr; gap: 3rem;
-  align-items: center; max-width: 76rem; margin: 0 auto; width: 100%;
+  align-items: start; max-width: 76rem; margin: 0 auto; width: 100%;
 }
 .hero-split .hero-text { text-align: left; }
 .hero .sub { margin-left: 0; max-width: 40rem; }
