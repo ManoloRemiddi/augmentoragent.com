@@ -73,7 +73,7 @@
                 <span class="dots"><span class="dot-c"></span><span class="dot-c"></span><span class="dot-c"></span></span>
                 <span class="url">Augmentor · side panel, live in your browser</span>
               </div>
-              <img class="shot shot-panel" src="assets/shot-panel.png" alt="Augmentor side panel in Chromium — a live chat on the local Qwen3.8-27B model, with the model chip and site link in the dock" loading="lazy">
+              <img class="shot shot-panel" src="assets/shot-panel.png" alt="Augmentor side panel in Chromium — a live extraction from augmentatism.com on the local Qwen3.8-27B model, with the model chip and site link in the dock" loading="lazy">
             </div>
             <p class="device-cap"><span class="dot-live"></span>the real side panel · live in your browser</p>
           </div>
@@ -151,17 +151,17 @@
         <div class="install-grid">
           <div class="turn-mock reveal">
             <div class="tm-head"><span class="who">Augmentor · Augmentor Chat</span><span class="badge">Qwen3.8-27B · local</span></div>
-            <div class="turn-bubble user">Open example.com and tell me the exact title.</div>
-            <div class="turn-step done"><span class="s-dot"></span>Opened example.com</div>
-            <div class="turn-step active"><span class="s-dot"></span>Analysing the page…</div>
-            <div class="turn-bubble agent" id="agent-answer">The page title is <strong style="color:#fff;">“Example Domain”</strong>. It explains the domain is reserved for examples in documents.</div>
+            <div class="turn-bubble user">Extract the most important points from https://augmentatism.com/</div>
+            <div class="turn-step done"><span class="s-dot"></span>Opened augmentatism.com</div>
+            <div class="turn-step active"><span class="s-dot"></span>Reading the manifesto…</div>
+            <div class="turn-bubble agent" id="agent-answer"><strong style="color:#fff;">One vs. Many.</strong> Corporate AI is the “One” — <em>cognitive colonization</em>: flattening one subculture, then imposing it on everyone. Augmentatism is the “Many”: AI Artisans building Sovereign AIs through World Building, bound by a seven-principle Social Contract whose floor is Anti-Capture. Closing line: <em>“Resist the Monoculture. Build Your Sovereign World. Connect the Multiverse.”</em></div>
           </div>
           <div class="shot-frame reveal">
             <div class="chrome">
               <span class="dots"><span class="dot-c"></span><span class="dot-c"></span><span class="dot-c"></span></span>
-              <span class="url">https://example.com · agent is driving this tab</span>
+              <span class="url">https://augmentatism.com · agent is driving this tab</span>
             </div>
-            <img src="assets/shot-veil.png" alt="The Augmentor frost veil over a browser tab with a status pill" loading="lazy">
+            <img src="assets/shot-veil.png" alt="The Augmentor frost veil over augmentatism.com with a status pill" loading="lazy">
             <div class="shot-cap"><span class="t">The frost veil, live</span>Condenses in, breathes for the whole turn, and melts when the answer lands. The pill says exactly what’s happening, in plain words.</div>
           </div>
         </div>
@@ -237,7 +237,7 @@
 <span class="p">./install-native-host.sh</span> &lt;extension-id&gt;
 
 <span class="c"># model calls browser_navigate → plugin WS → extension → the real tab</span>
-<span class="k">browser_navigate</span>  <span class="hl">"https://example.com"</span>  <span class="c"># ~200ms round trip</span>
+<span class="k">browser_navigate</span>  <span class="hl">"https://augmentatism.com"</span>  <span class="c"># ~200ms round trip</span>
             </div>
           </div>
         </div>
@@ -298,7 +298,7 @@
         <div class="veil-demo reveal" id="veil-demo">
           <canvas id="veil-canvas"></canvas>
           <div class="page-mock">
-            <p class="mock-title">example.com</p>
+            <p class="mock-title">augmentatism.com</p>
             <div class="mock-line"></div>
             <div class="mock-line"></div>
             <div class="mock-line short"></div>
@@ -353,7 +353,7 @@
             <div class="stat"><div class="num"><span class="counter" data-to="17" data-suf="px">0</span></div><div class="lbl">streaming renders ≤ 50ms apart</div></div>
             <div class="stat"><div class="num"><span class="counter" data-to="0" data-suf="">0</span></div><div class="lbl">patches to DeepSeek Harness</div></div>
           </div>
-          <p class="veil-caption mt-6">"open example.com · snapshot · tell me the title" → prompt to idle in 3.42s on a local 27B model.</p>
+          <p class="veil-caption mt-6">“extract the most important points from augmentatism.com” → prompt to idle in 2m 27s on a local 27B model — 7 steps, 3.4k reply tokens, measured from the session store.</p>
         </div>
       </div>
     </section>
