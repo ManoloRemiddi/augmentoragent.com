@@ -620,6 +620,23 @@ footer .wordmark { font-size: 1.2rem; margin-bottom: 0.4rem; }
 footer .tag { color: var(--text-faint); font-size: 0.9rem; }
 footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem; font-family: var(--font-mono); }
 
+/* ---------- Footer social icons ---------- */
+.footer-social { display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem; }
+.footer-social a {
+  display: grid; place-items: center; width: 42px; height: 42px;
+  border-radius: 12px; border: 1px solid var(--glass-border);
+  background: var(--glass-bg); color: var(--text-dim);
+  transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+.footer-social a svg { width: 20px; height: 20px; fill: currentColor; }
+.footer-social a:hover { transform: translateY(-3px); }
+.footer-social .soc-discord:hover { color: #5865f2; border-color: rgba(88, 101, 242, 0.5); box-shadow: 0 8px 24px -8px rgba(88, 101, 242, 0.45); }
+.footer-social .soc-youtube:hover { color: #ff0033; border-color: rgba(255, 0, 51, 0.5); box-shadow: 0 8px 24px -8px rgba(255, 0, 51, 0.4); }
+.footer-social .soc-github:hover { color: #f4f4f5; border-color: rgba(255, 255, 255, 0.35); box-shadow: 0 8px 24px -8px rgba(255, 255, 255, 0.25); }
+@media (prefers-reduced-motion: reduce) {
+  .footer-social a, .footer-social a:hover { transition: none; transform: none; }
+}
+
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.8s cubic-bezier(.16,1,.3,1), transform 0.8s cubic-bezier(.16,1,.3,1); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
