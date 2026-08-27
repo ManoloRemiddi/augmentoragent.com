@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=4">
+  <link rel="stylesheet" href="assets/style.css?v=5">
 </head>
 <body class="bg-black text-zinc-100 antialiased overflow-x-hidden">
 
@@ -462,46 +462,22 @@
       <div class="shell">
         <p class="step-num">INSTALL</p>
         <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
-        <p class="section-lead">Two ways to install: do it by hand below, or copy one prompt and let your agent do it. If you already run DSH, you’re 90% of the way there.</p>
+        <p class="section-lead">The easy way: copy one prompt and let your agent install it — DSH and Augmentor, end to end, with a report of exactly what it did. Prefer to do it by hand? The full manual steps are one tab over.</p>
 
         <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and extension versions in step. The pipe’s handshake reports exactly which DSH version it reached (in the pipe’s log), so a drift is easy to spot.</div>
 
-        <!-- 0 · Prerequisite: DeepSeek Harness -->
-        <div class="glass-card install-col reveal" style="margin-bottom:1.5rem;">
-          <h3 class="color-primary" style="margin-top:0;">0 · Install DeepSeek Harness <span style="font-weight:400;color:var(--text-dim);font-size:0.95rem;">— only if you don’t have it</span></h3>
-          <p style="color:var(--text-mid);margin-bottom:1rem;">Augmentor is a plugin for DeepSeek Harness (DSH), so DSH is the runtime you need first. Get it from <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="color:#34d399;">github.com/deepseek-ai/deepseek-harness</a>.</p>
-          <div class="step"><span class="n">1</span><div>Install <strong style="color:#fff;">Node.js</strong> (v20+), then copy-paste into a terminal:</div></div>
-          <div class="code"><span class="p">npx</span> @deepseek-ai/dsh <span class="k">web</span></div>
-          <div class="step mt-6"><span class="n">2</span><div>DSH starts the web UI at <code class="mono">http://127.0.0.1:3080</code> and opens it in your browser. Once it’s up, come back and install Augmentor below.</div></div>
-          <p class="veil-caption mt-2">Run it from source instead: <code class="mono">git clone https://github.com/deepseek-ai/deepseek-harness.git &amp;&amp; cd deepseek-harness &amp;&amp; pnpm install &amp;&amp; pnpm run build &amp;&amp; pnpm dsh web</code></p>
-        </div>
-
-        <div class="install-grid">
-          <div class="glass-card install-col reveal">
-            <h3 class="color-primary" style="margin-top:0;">A · The Chromium extension</h3>
-            <div class="step"><span class="n">1</span><div>Open <code class="mono">chrome://extensions</code>, turn on <strong style="color:#fff;">Developer mode</strong>.</div></div>
-            <div class="step"><span class="n">2</span><div><strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">augmentor/extension/</code> folder.</div></div>
-            <div class="step"><span class="n">3</span><div>Note the extension id, then install the native host:</div></div>
-            <div class="code"><span class="p">./install-native-host.sh</span> &lt;extension-id&gt;</div>
-            <div class="step mt-6"><span class="n">4</span><div>Open the side panel — it connects automatically. Pick a model if you like, and send a prompt.</div></div>
+        <div class="install-tabs reveal">
+          <div class="install-tabbar" role="tablist" aria-label="Install method">
+            <button type="button" class="install-tab active" id="tab-auto" role="tab" aria-selected="true" aria-controls="panel-auto">Automatic<span class="tab-rec">recommended</span></button>
+            <button type="button" class="install-tab" id="tab-manual" role="tab" aria-selected="false" aria-controls="panel-manual">Manual</button>
           </div>
 
-          <div class="glass-card install-col reveal">
-            <h3 class="color-secondary" style="margin-top:0;">B · The DSH plugin</h3>
-            <div class="step"><span class="n">1</span><div>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a>, then install its <code class="mono">plugin/</code> package into your profile:</div></div>
-            <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">&lt;repo&gt;/plugin</span></div>
-            <div class="step mt-6"><span class="n">2</span><div>It declares a <code class="mono">dsh.bundle</code> patch, so it joins the profile’s layer stack automatically. The app <em>live-watches</em> the stack and mounts the plugin without a restart.</div></div>
-            <div class="step"><span class="n">3</span><div>The plugin registers the five <code class="mono">browser_*</code> tools and its <code class="mono">/api/augmentor</code> handshake route — the thing the extension’s pipe talks to. Its GUI card shows connection status, endpoint, and the chat directory.</div></div>
-            <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
-          </div>
-        </div>
-
-        <!-- Automatic install -->
-        <div class="glass-card reveal" style="margin-top:1.5rem;">
-          <p class="step-num">OR · AUTOMATIC INSTALL</p>
-          <h3 class="section-head" style="font-size:1.5rem;margin-bottom:0.75rem;">Let your agent install it for you.</h3>
-          <p class="section-lead" style="max-width:42rem;margin:0 0 1.25rem;">Not in the mood to click around? Copy this prompt into the AI you already use — your DSH agent or any coding assistant. It installs DSH and Augmentor end-to-end and reports exactly what it did.</p>
-          <div class="code" style="white-space:pre-wrap;">You are installing Augmentor Agent (a DeepSeek Harness plugin + Chromium extension) on this machine. Work step by step; confirm each step and report what you did.
+          <!-- Automatic: one prompt, your agent does the work -->
+          <div class="install-tabpanel active" id="panel-auto" role="tabpanel" aria-labelledby="tab-auto">
+            <div class="glass-card install-col">
+              <h3 class="color-primary" style="margin-top:0;">Let your agent install it for you.</h3>
+              <p style="color:var(--text-mid);max-width:42rem;margin:0.75rem 0 1.25rem;">Paste this prompt into the AI you already use — your DSH agent or any coding assistant. It works step by step, confirms each step, and reports exactly what it installed and where.</p>
+              <div class="code install-prompt" id="auto-prompt" style="white-space:pre-wrap;">You are installing Augmentor Agent (a DeepSeek Harness plugin + Chromium extension) on this machine. Work step by step; confirm each step and report what you did.
 
 1) Prereq — confirm Node.js 20+ and npm are installed (`node -v`, `npm -v`). If not, install Node.js.
 
@@ -516,7 +492,42 @@
 6) Open the Augmentor side panel — it connects on its own — pick a model, and send a test prompt to confirm it works.
 
 Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
-          <p class="veil-caption mt-2">The extension id sits on the extension’s card in <code class="mono">chrome://extensions</code> — copy it from there. (Internal chrome:// pages are beyond the veil’s reach, so those clicks stay yours.)</p>
+              <div class="install-prompt-actions"><button type="button" class="copy-btn" id="copy-prompt">Copy prompt</button></div>
+              <p class="veil-caption">The extension id sits on the extension’s card in <code class="mono">chrome://extensions</code> — copy it from there. (Internal chrome:// pages are beyond the veil’s reach, so those clicks stay yours.)</p>
+            </div>
+          </div>
+
+          <!-- Manual: the full steps by hand -->
+          <div class="install-tabpanel" id="panel-manual" role="tabpanel" aria-labelledby="tab-manual">
+            <div class="glass-card install-col" style="margin-bottom:1.5rem;">
+              <h3 class="color-primary" style="margin-top:0;">0 · Install DeepSeek Harness <span style="font-weight:400;color:var(--text-dim);font-size:0.95rem;">— only if you don’t have it</span></h3>
+              <p style="color:var(--text-mid);margin-bottom:1rem;">Augmentor is a plugin for DeepSeek Harness (DSH), so DSH is the runtime you need first. Get it from <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="color:#34d399;">github.com/deepseek-ai/deepseek-harness</a>.</p>
+              <div class="step"><span class="n">1</span><div>Install <strong style="color:#fff;">Node.js</strong> (v20+), then copy-paste into a terminal:</div></div>
+              <div class="code"><span class="p">npx</span> @deepseek-ai/dsh <span class="k">web</span></div>
+              <div class="step mt-6"><span class="n">2</span><div>DSH starts the web UI at <code class="mono">http://127.0.0.1:3080</code> and opens it in your browser. Once it’s up, come back and install Augmentor below.</div></div>
+              <p class="veil-caption mt-2">Run it from source instead: <code class="mono">git clone https://github.com/deepseek-ai/deepseek-harness.git &amp;&amp; cd deepseek-harness &amp;&amp; pnpm install &amp;&amp; pnpm run build &amp;&amp; pnpm dsh web</code></p>
+            </div>
+
+            <div class="install-grid">
+              <div class="glass-card install-col">
+                <h3 class="color-primary" style="margin-top:0;">A · The Chromium extension</h3>
+                <div class="step"><span class="n">1</span><div>Open <code class="mono">chrome://extensions</code>, turn on <strong style="color:#fff;">Developer mode</strong>.</div></div>
+                <div class="step"><span class="n">2</span><div><strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">augmentor/extension/</code> folder.</div></div>
+                <div class="step"><span class="n">3</span><div>Note the extension id, then install the native host:</div></div>
+                <div class="code"><span class="p">./install-native-host.sh</span> &lt;extension-id&gt;</div>
+                <div class="step mt-6"><span class="n">4</span><div>Open the side panel — it connects automatically. Pick a model if you like, and send a prompt.</div></div>
+              </div>
+
+              <div class="glass-card install-col">
+                <h3 class="color-secondary" style="margin-top:0;">B · The DSH plugin</h3>
+                <div class="step"><span class="n">1</span><div>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a>, then install its <code class="mono">plugin/</code> package into your profile:</div></div>
+                <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">&lt;repo&gt;/plugin</span></div>
+                <div class="step mt-6"><span class="n">2</span><div>It declares a <code class="mono">dsh.bundle</code> patch, so it joins the profile’s layer stack automatically. The app <em>live-watches</em> the stack and mounts the plugin without a restart.</div></div>
+                <div class="step"><span class="n">3</span><div>The plugin registers the five <code class="mono">browser_*</code> tools and its <code class="mono">/api/augmentor</code> handshake route — the thing the extension’s pipe talks to. Its GUI card shows connection status, endpoint, and the chat directory.</div></div>
+                <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -654,6 +665,44 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // Install tabs (Automatic is the default)
+    const installTabs = document.querySelectorAll('.install-tab');
+    installTabs.forEach(tab => tab.addEventListener('click', () => {
+      installTabs.forEach(t => {
+        const on = t === tab;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      document.querySelectorAll('.install-tabpanel').forEach(p =>
+        p.classList.toggle('active', p.id === tab.getAttribute('aria-controls')));
+    }));
+    const tabbar = document.querySelector('.install-tabbar');
+    if (tabbar) tabbar.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+      const list = [...document.querySelectorAll('.install-tab')];
+      const i = list.indexOf(document.activeElement);
+      if (i < 0) return;
+      const next = list[(i + (e.key === 'ArrowRight' ? 1 : list.length - 1)) % list.length];
+      next.focus();
+      next.click();
+    });
+
+    // Copy the automatic-install prompt
+    const copyBtn = document.getElementById('copy-prompt');
+    if (copyBtn) copyBtn.addEventListener('click', async () => {
+      const text = (document.getElementById('auto-prompt') || {}).innerText || '';
+      try { await navigator.clipboard.writeText(text); }
+      catch {
+        const ta = document.createElement('textarea');
+        ta.value = text; document.body.appendChild(ta); ta.select();
+        document.execCommand('copy'); ta.remove();
+      }
+      const old = copyBtn.textContent;
+      copyBtn.textContent = 'Copied ✓';
+      copyBtn.classList.add('copied');
+      setTimeout(() => { copyBtn.textContent = old; copyBtn.classList.remove('copied'); }, 1800);
+    });
   </script>
 </body>
 </html>
