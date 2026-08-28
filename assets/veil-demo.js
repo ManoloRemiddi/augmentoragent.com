@@ -1,3 +1,8 @@
+// Augmentor Agent — website (augmentoragent.com)
+// Copyright © 2026 Manolo Remiddi
+// SPDX-License-Identifier: MIT
+// License: MIT — see LICENSE at the repository root.
+
 /* Augmentor · frost veil demo
    A compact WebGL frost sheet (domain-warped fbm + edge band + snowfall)
    with a plain-language status pill that cycles through the real turn

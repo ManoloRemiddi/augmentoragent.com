@@ -1,3 +1,8 @@
+<!-- Augmentor Agent — website (augmentoragent.com)
+     Copyright © 2026 Manolo Remiddi
+     SPDX-License-Identifier: MIT
+     License: MIT — see LICENSE at the repository root. -->
+
 # augmentoragent.com
 
 Official website for **Augmentor Agent** — real browser hands for DeepSeek Harness.
