@@ -117,7 +117,7 @@
 
       <!-- Trust fence -->
       <h2 id="trust" class="h3sec">The trust fence, settled</h2>
-      <p style="color:var(--text-mid);">DSH has a hardcoded defense (not config) that refuses browser-originated requests on its API. Understanding it is why the pipe exists.</p>
+      <p style="color:var(--text-mid);">DSH has a built-in defense (not configurable from Augmentor) that refuses browser-originated requests on its API. Understanding it is why the pipe exists.</p>
       <div class="grid-3">
         <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Host fence</h3><p>Host must be loopback (<code class="mono">127/8</code>, <code class="mono">::1</code>) or a declared trusted authority, applied to every request.</p></div>
         <div class="card reveal"><h3 class="color-primary" style="font-size:1.05rem;">Cross-site fence</h3><p><code class="mono">sec-fetch-site: cross-site</code> is refused. Browsers attach this metadata; a Node process never does.</p></div>
@@ -146,7 +146,7 @@
         <h3 class="color-primary" style="margin-top:0;">0 · Install DeepSeek Harness <span style="font-weight:400;color:var(--text-dim);font-size:0.95rem;">— only if you don't have it</span></h3>
         <p style="color:var(--text-mid);margin-bottom:1rem;">Augmentor is a plugin for DeepSeek Harness (DSH), so DSH is the runtime you need first. Get it from <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="color:#34d399;">github.com/deepseek-ai/deepseek-harness</a>.</p>
         <ul class="arrow-list" style="margin-top:0.6rem;">
-          <li><span class="arrow">→</span><span>Install <strong style="color:#fff;">Node.js</strong> (v20+), then copy-paste into a terminal: <code class="mono">npx @deepseek-ai/dsh web</code></span></li>
+          <li><span class="arrow">→</span><span>Install <strong style="color:#fff;">Node.js</strong> (v22.19+ or v24+), then copy-paste into a terminal: <code class="mono">npx @deepseek-ai/dsh web</code></span></li>
           <li><span class="arrow">→</span><span>DSH starts the web UI at <code class="mono">http://127.0.0.1:3080</code> and opens it in your browser.</span></li>
           <li><span class="arrow">→</span><span>From source instead: <code class="mono">git clone https://github.com/deepseek-ai/deepseek-harness.git &amp;&amp; cd deepseek-harness &amp;&amp; pnpm install &amp;&amp; pnpm run build &amp;&amp; pnpm dsh web</code></span></li>
         </ul>
@@ -155,7 +155,7 @@
         <div class="glass-card reveal">
           <h3 class="color-primary" style="margin-top:0;">A · Extension</h3>
           <ol class="arrow-list" style="margin-top:0.6rem;">
-            <li><span class="arrow">→</span><span><code class="mono">chrome://extensions</code> → Developer mode → <strong style="color:#fff;">Load unpacked</strong> → select <code class="mono">augmentor/extension/</code>.</span></li>
+            <li><span class="arrow">→</span><span><code class="mono">chrome://extensions</code> → Developer mode → <strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">extension/</code> folder at the top of the cloned repo.</span></li>
             <li><span class="arrow">→</span><span>Note the extension id.</span></li>
             <li><span class="arrow">→</span><span>Run <code class="mono">./install-native-host.sh &lt;extension-id&gt;</code> (launch Chromium from a shell where <code class="mono">node</code> resolves).</span></li>
             <li><span class="arrow">→</span><span>Open the side panel — it connects automatically — and prompt it.</span></li>
@@ -164,8 +164,8 @@
         <div class="glass-card reveal">
           <h3 class="color-secondary" style="margin-top:0;">B · Plugin</h3>
           <ul class="arrow-list" style="margin-top:0.6rem;">
-            <li><span class="arrow">→</span><span>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a> and install the package: <code class="mono">dsh plugin --profile &lt;name&gt; add &lt;repo&gt;/plugin</code>.</span></li>
-            <li><span class="arrow">→</span><span>It declares a <code class="mono">dsh.bundle</code> patch, so it joins the profile’s layer stack automatically; the app live-watches the stack and mounts the plugin without a restart.</span></li>
+            <li><span class="arrow">→</span><span>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a> and install the package: <code class="mono">dsh plugin --profile &lt;name&gt; add &lt;repo&gt;/plugin</code> (or from npm: <code class="mono">dsh plugin --profile &lt;name&gt; add dsh-augmentor</code>).</span></li>
+            <li><span class="arrow">→</span><span>It joins the profile’s plugin stack automatically and composes when the app boots — restart the app once after installing if it’s already running (about five seconds).</span></li>
             <li><span class="arrow">→</span><span>The plugin’s GUI card shows connection status, endpoint, and the chat directory (default <code class="mono">~/Augmentor</code>).</span></li>
             <li><span class="arrow">→</span><span>No DSH fork, no local patch.</span></li>
           </ul>
@@ -178,17 +178,19 @@
         <p class="section-lead" style="max-width:42rem;margin:0 0 1.25rem;">Not in the mood to click around? Copy this prompt into the AI you already use — your DSH agent or any coding assistant. It installs DSH and Augmentor end-to-end and reports exactly what it did.</p>
         <div class="code" style="white-space:pre-wrap;">You are installing Augmentor Agent (a DeepSeek Harness plugin + Chromium extension) on this machine. Work step by step; confirm each step and report what you did.
 
-1) Prereq — confirm Node.js 20+ and npm are installed (`node -v`, `npm -v`). If not, install Node.js.
+1) Prereq — confirm Node.js (v22.19+ or v24+) and git are installed (`node -v`, `git --version`). If not, install them.
 
-2) Install DeepSeek Harness if it isn't already running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
+2) Start DeepSeek Harness if it isn't running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
 
-3) Load the Augmentor Chromium extension: open chrome://extensions, enable Developer mode, click "Load unpacked", and select the extension/ folder of the Augmentor repo (clone it first: https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin). Note the extension id.
+3) Clone the Augmentor repo: `git clone https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin`.
 
-4) Install the native-messaging host: run `./install-native-host.sh &lt;extension-id&gt;` from the Augmentor repo.
+STOP HERE — the next step is mine, not yours: I open chrome://extensions in my browser, enable Developer mode, click "Load unpacked", select the extension/ folder of the cloned repo, and paste the extension id (shown on the extension's card) back to you. Wait for it.
 
-5) Add the DSH plugin: run `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin`.
+4) From the Augmentor repo, run `./install-native-host.sh &lt;extension-id&gt;` with the id I give you.
 
-6) Open the Augmentor side panel — it connects on its own — pick a model, and send a test prompt to confirm it works.
+5) Add the DSH plugin: `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin` (or from npm: `dsh plugin --profile &lt;name&gt; add dsh-augmentor`).
+
+6) I then restart the DSH app (the plugin composes at boot) and the browser once. You verify: `curl -s http://127.0.0.1:3080/api/augmentor` returns the handshake with `"pipes": 1`, and the Augmentor side panel connects.
 
 Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
       </div>
@@ -205,7 +207,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
       </div>
       <div class="faq-item reveal">
         <button class="faq-q"><span>Is it published / on the store?</span><span class="chev">▾</span></button>
-        <div class="faq-a">Not yet. This is a v0.1.25 preview build loaded unpacked. The plugin installs into your DSH profile’s bundle stack; publishing the extension to a store is a separate decision.</div>
+        <div class="faq-a">Not yet. This is a v0.1.27 preview build: the extension loads unpacked from the repo, and the DSH plugin installs from the repo — or from npm as <code class="mono">dsh-augmentor</code>. Publishing the extension to a store is a separate decision.</div>
       </div>
 
       <div class="glass-card cta-card reveal mt-10" style="margin-top:3rem;">
