@@ -506,7 +506,7 @@ STOP HERE — the next step is mine, not yours: I open chrome://extensions in my
 
 4) From the Augmentor repo, run `./install-native-host.sh &lt;extension-id&gt;` with the id I give you.
 
-5) Add the DSH plugin: `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin` (or from npm: `dsh plugin --profile &lt;name&gt; add dsh-augmentor`).
+5) Add the DSH plugin: `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin` (or from npm: `dsh plugin --profile &lt;name&gt; add dsh-augmentor`). For the first ~24h after a new release, pnpm may install the previous version (release-age protection) — pin it with `dsh-augmentor@&lt;version&gt;` if you need the newest (see the repo README).
 
 6) I then restart the DSH app (the plugin composes at boot) and the browser once. You verify: `curl -s http://127.0.0.1:3080/api/augmentor` returns the handshake with `"pipes": 1`, and the Augmentor side panel connects.
 

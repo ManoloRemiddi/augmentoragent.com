@@ -171,6 +171,7 @@
           <h3 class="color-secondary" style="margin-top:0;">B · Plugin</h3>
           <ul class="arrow-list" style="margin-top:0.6rem;">
             <li><span class="arrow">→</span><span>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a> and install the package: <code class="mono">dsh plugin --profile &lt;name&gt; add &lt;repo&gt;/plugin</code> (or from npm: <code class="mono">dsh plugin --profile &lt;name&gt; add dsh-augmentor</code>).</span></li>
+            <li><span class="arrow">→</span><span>First ~24h after a release: pnpm’s release-age protection may install the previous version — pin <code class="mono">dsh-augmentor@&lt;version&gt;</code> if you need the newest (repo README).</span></li>
             <li><span class="arrow">→</span><span>It joins the profile’s plugin stack automatically and composes when the app boots — restart the app once after installing if it’s already running (about five seconds).</span></li>
             <li><span class="arrow">→</span><span>The plugin’s GUI card shows connection status, endpoint, and the chat directory (default <code class="mono">~/Augmentor</code>).</span></li>
             <li><span class="arrow">→</span><span>No DSH fork, no local patch.</span></li>
