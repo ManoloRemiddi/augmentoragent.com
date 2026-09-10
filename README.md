@@ -50,7 +50,7 @@ redirect is handled by GitHub Pages edge once the domain is verified.
 
 ## Notes
 
-- Mirror of the source-of-truth site files is kept at `../augmentor/website/`
-  (in the product repo). Keep the two in sync when editing.
+- This repository is the deployed website source. Keep installation instructions
+  in sync with the released product README and GitHub release assets.
 - `config`-level defaults: none. Everything the site claims matches the plugin
   and extension behavior; keep claims in step with the product code.

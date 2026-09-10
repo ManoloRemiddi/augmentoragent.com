@@ -439,8 +439,13 @@ a { color: inherit; text-decoration: none; }
 }
 .arrow-list .arrow { color: var(--color-primary); margin-right: 0.25rem; font-size: 1.1rem; }
 
+/* Installation links remain visible within instructional text. */
+.install-col a, #model-picker a { color: var(--color-primary); text-decoration: underline; }
+
 /* ---------- Code / CLI ---------- */
 .code {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   background: #050505;

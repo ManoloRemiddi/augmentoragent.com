@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=12">
+  <link rel="stylesheet" href="assets/style.css?v=13">
 </head>
 <body class="bg-black text-zinc-100 antialiased overflow-x-hidden">
 
@@ -472,7 +472,7 @@
                 <span class="card-soon">soon</span>
               </div>
             </div>
-            <p class="board-note">Same plugin, same pipe — the extension is standard MV3, so the same codebase ships to both. No reinstall dance, no second account: your DSH stays the one and only runtime.</p>
+            <p class="board-note">Firefox and Safari are not supported yet. The current extension and native-host installer target Chromium; platform support needs separate testing.</p>
           </div>
         </div>
       </div>
@@ -483,9 +483,10 @@
       <div class="shell">
         <p class="step-num">INSTALL</p>
         <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
-        <p class="section-lead">The easy way: copy one prompt and let your agent install it — DSH and Augmentor, end to end, with a report of exactly what it did. Prefer to do it by hand? The full manual steps are one tab over.</p>
+        <p class="section-lead">Augmentor 0.1.32 is compatible with DSH 0.1.5-rc.1. Download the complete bundle, then use the assistant prompt or follow the manual steps. Tested on Linux with Chromium.</p>
 
-        <div class="callout"><strong>Heads-up:</strong> DSH is pre-release, so keep the DSH and Augmentor versions in step. The pipe’s log reports exactly which Augmentor version it reached (extension and plugin ship in lockstep), so a drift is easy to spot.</div>
+        <p><a class="btn btn-primary" href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip">Download Augmentor 0.1.32 ZIP</a> &nbsp; <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/tag/v0.1.32">GitHub release and source</a></p>
+<div class="callout"><strong>Upgrading from 0.1.31 or earlier?</strong> Update all three parts: plugin, native host and extension. Older versions cannot connect to the new DSH API, so use the manual steps below if the panel updater cannot open. Back up your old Augmentor folder; update any existing linked plugin path, rerun the native-host installer and reload the extension from the new bundle. The installer preserves custom presets and backs up a legacy preset before migrating it.</div>
 
         <div class="install-tabs reveal">
           <div class="install-tabbar" role="tablist" aria-label="Install method">
@@ -498,60 +499,58 @@
             <div class="glass-card install-col">
               <h3 class="color-primary" style="margin-top:0;">Let your agent install it for you.</h3>
               <p style="color:var(--text-mid);max-width:42rem;margin:0.75rem 0 1.25rem;">Paste this prompt into the AI you already use — your DSH agent or any coding assistant. It works step by step, confirms each step, and reports exactly what it installed and where.</p>
-              <div class="code install-prompt" id="auto-prompt" style="white-space:pre-wrap;">You are installing Augmentor Agent (a DeepSeek Harness plugin + Chromium extension) on this machine. Work step by step; confirm each step and report what you did.
+              <div class="code install-prompt" id="auto-prompt" style="white-space:pre-wrap;">Install Augmentor Agent 0.1.32 (DSH plugin, native host and Chromium extension) on this machine. Inspect the existing installation first and preserve my settings, chats and browser profile. These steps are tested on Linux with Chromium; check native-messaging support and the browser&#x27;s configuration directory on other platforms before proceeding.
 
-1) Prereq — confirm Node.js (v22.19+ or v24+) and git are installed (`node -v`, `git --version`). If not, install them.
+1) Check Node.js (22.19+ or 24+) and install/update the DSH CLI with `npm install -g @deepseek-ai/dsh@0.1.5-rc.1`. Verify `dsh --version`. Keep the existing DSH_HOME and profile; the default profile is web.
 
-2) Start DeepSeek Harness if it isn't running: `npx @deepseek-ai/dsh web`. Verify the UI is up at http://127.0.0.1:3080.
+2) Download https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip and extract the entire archive into a permanent folder. It contains extension/, plugin/, the native host and the agent preset. Keep all these files together. Back up any older Augmentor folder before replacing it.
 
-3) Clone the Augmentor repo: `git clone https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin`.
+3) Have me open chrome://extensions, enable Developer mode and load the extracted extension/ folder using Load unpacked. Obtain the extension ID from its card. If browser control cannot access this page, pause for my ID.
 
-STOP HERE — the next step is mine, not yours: I open chrome://extensions in my browser, enable Developer mode, click "Load unpacked", select the extension/ folder of the cloned repo, and paste the extension id (shown on the extension's card) back to you. Wait for it.
+4) From the extracted augmentor-0.1.32 folder, run `sh install-native-host.sh &lt;extension-id&gt; &quot;$HOME/.config/chromium&quot;`. Use the actual browser user-data root if different (not its Default subfolder). Run `dsh plugin --profile web add &quot;$PWD/plugin&quot;`, adapting web only if my app uses a different profile. For an existing linked plugin, update its source directory instead of creating a duplicate.
 
-4) From the Augmentor repo, run `./install-native-host.sh &lt;extension-id&gt;` with the id I give you.
+5) Restart the existing DSH web process or service so it uses the updated CLI and profile; if none is running, use `dsh web`. Open the complete local URL printed by DSH, including its authentication token. This is local browser authentication, not a DeepSeek website login. Do not disclose the token. Restart Chromium and confirm the extension card reports 0.1.32.
 
-5) Add the DSH plugin: `dsh plugin --profile &lt;name&gt; add &lt;path-to-augmentor-repo&gt;/plugin` (or from npm: `dsh plugin --profile &lt;name&gt; add dsh-augmentor`). For the first ~24h after a new release, pnpm may install the previous version (release-age protection) — pin it with `dsh-augmentor@&lt;version&gt;` if you need the newest (see the repo README).
+6) Verify http://127.0.0.1:3080/api/augmentor reports version 0.1.32 and pipes: 1 after opening the side panel. Confirm the model list, a new chat and a response with an available configured model. Report failures rather than declaring installation complete. Local models can work offline once installed; cloud providers require their own credentials and internet.
 
-6) I then restart the DSH app (the plugin composes at boot) and the browser once. You verify: `curl -s http://127.0.0.1:3080/api/augmentor` returns the handshake with `"pipes": 1`, and the Augmentor side panel connects.
+Optional recommendation: Model Picker Augmented 1.1.2 adds search, pins and visibility controls to DSH. Install it only if I want it, using `dsh plugin --profile web add https://github.com/ManoloRemiddi/dsh-model-picker-augmented/releases/download/v1.1.2/dsh-model-picker-augmented-1.1.2.tgz`, then restart DSH and reload the page. Update an existing linked installation instead of adding a duplicate.
 
-Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chromium extension. When you are done, tell me exactly what you installed and where.</div>
+Report the installed versions and paths, checks performed, and any remaining manual step.</div>
               <div class="install-prompt-actions"><button type="button" class="copy-btn" id="copy-prompt">Copy prompt</button></div>
               <p class="veil-caption">The extension id sits on the extension’s card in <code class="mono">chrome://extensions</code> — copy it from there. (Internal chrome:// pages are beyond the veil’s reach, so those clicks stay yours.)</p>
             </div>
           </div>
 
-          <!-- Manual: the full steps by hand -->
+          <!-- Manual: verified release installation -->
           <div class="install-tabpanel" id="panel-manual" role="tabpanel" aria-labelledby="tab-manual">
-            <div class="glass-card install-col" style="margin-bottom:1.5rem;">
-              <h3 class="color-primary" style="margin-top:0;">0 · Install DeepSeek Harness <span style="font-weight:400;color:var(--text-dim);font-size:0.95rem;">— only if you don’t have it</span></h3>
-              <p style="color:var(--text-mid);margin-bottom:1rem;">Augmentor is a plugin for DeepSeek Harness (DSH), so DSH is the runtime you need first. Get it from <a href="https://github.com/deepseek-ai/deepseek-harness" target="_blank" rel="noopener" style="color:#34d399;">github.com/deepseek-ai/deepseek-harness</a>.</p>
-              <div class="step"><span class="n">1</span><div>Install <strong style="color:#fff;">Node.js</strong> (v22.19+ or v24+), then copy-paste into a terminal:</div></div>
-              <div class="code"><span class="p">npx</span> @deepseek-ai/dsh <span class="k">web</span></div>
-              <div class="step mt-6"><span class="n">2</span><div>DSH starts the web UI at <code class="mono">http://127.0.0.1:3080</code> and opens it in your browser. Once it’s up, come back and install Augmentor below.</div></div>
-              <p class="veil-caption mt-2">Run it from source instead: <code class="mono">git clone https://github.com/deepseek-ai/deepseek-harness.git &amp;&amp; cd deepseek-harness &amp;&amp; pnpm install &amp;&amp; pnpm run build &amp;&amp; pnpm dsh web</code></p>
-            </div>
-
-            <div class="install-grid">
-              <div class="glass-card install-col">
-                <h3 class="color-primary" style="margin-top:0;">A · The Chromium extension</h3>
-                <div class="step"><span class="n">1</span><div>Open <code class="mono">chrome://extensions</code>, turn on <strong style="color:#fff;">Developer mode</strong>.</div></div>
-                <div class="step"><span class="n">2</span><div><strong style="color:#fff;">Load unpacked</strong> → select the <code class="mono">extension/</code> folder at the top of the cloned Augmentor repo.</div></div>
-                <div class="step"><span class="n">3</span><div>Note the extension id, then install the native host:</div></div>
-                <div class="code"><span class="p">./install-native-host.sh</span> &lt;extension-id&gt;</div>
-                <div class="step mt-6"><span class="n">4</span><div>Open the side panel — it connects automatically. Pick a model if you like, and send a prompt.</div></div>
-              </div>
-
-              <div class="glass-card install-col">
-                <h3 class="color-secondary" style="margin-top:0;">B · The DSH plugin</h3>
-                <div class="step"><span class="n">1</span><div>Clone the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin" target="_blank" rel="noopener" style="color:#34d399;">Augmentor repo</a>, then install its <code class="mono">plugin/</code> package into your profile:</div></div>
-                <div class="code"><span class="p">dsh plugin</span> --profile &lt;name&gt; <span class="k">add</span> <span class="p">&lt;repo&gt;/plugin</span></div>
-                <div class="step mt-6"><span class="n">2</span><div>It joins the profile’s plugin stack automatically and composes when the app boots — if your DSH app is already running, restart it once after installing (about five seconds).</div></div>
-                <div class="step"><span class="n">3</span><div>The plugin registers the five <code class="mono">browser_*</code> tools and its <code class="mono">/api/augmentor</code> handshake route — the thing the extension’s pipe talks to. Its GUI card shows connection status, endpoint, and the chat directory.</div></div>
-                <div class="step"><span class="n">4</span><div>No patch to DSH, no fork, no second runtime, and it offers whatever models your settings do.</div></div>
-              </div>
-            </div>
+<div class="glass-card install-col">
+<h3 class="color-primary">1 · Install or update DSH</h3>
+<p>These steps are verified on <strong>Linux with Chromium</strong>. Install Node.js 22.19+ or 24+, then run:</p>
+<div class="code">npm install -g @deepseek-ai/dsh@0.1.5-rc.1
+dsh --version</div>
+<h3 class="color-primary">2 · Download the complete Augmentor bundle</h3>
+<p><a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip">Download Augmentor 0.1.32 ZIP</a> from the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/tag/v0.1.32">GitHub release</a>. Extract it into a permanent location. Keep the entire <code>augmentor-0.1.32/</code> folder: it includes the extension, DSH plugin, native host and agent preset. Moving it later requires running the installer again.</p>
+<h3 class="color-primary">3 · Load the extension and connect the native host</h3>
+<p>Open <code>chrome://extensions</code>, enable <strong>Developer mode</strong>, click <strong>Load unpacked</strong> and select the extracted <code>extension/</code> folder. Copy the extension ID from its card. In a terminal, enter the extracted <code>augmentor-0.1.32</code> folder and run the following, replacing <code>EXTENSION_ID</code> with that ID:</p>
+<div class="code">sh install-native-host.sh EXTENSION_ID "$HOME/.config/chromium"</div>
+<p>The second argument is the browser's user-data root, not its <code>Default</code> subfolder. See <a href="docs.html#install">browser paths and platform notes</a> for other browsers.</p>
+<h3 class="color-secondary">4 · Install the DSH plugin</h3>
+<p>From the same extracted folder:</p>
+<div class="code">dsh plugin --profile web add "$PWD/plugin"</div>
+<p>This installs the plugin included in the GitHub ZIP. Alternatively, use <code>dsh plugin --profile web add dsh-augmentor@0.1.32</code> for the npm package. Choose one method. Use your app's profile name if it is not <code>web</code>.</p>
+<h3 class="color-primary">5 · Restart, authenticate locally and test</h3>
+<p>Restart your existing DSH service or process. For a new installation, run <code>dsh web</code>. Open the <strong>complete URL printed by DSH</strong>, including its token; opening only <code>http://127.0.0.1:3080/</code> in a new browser session can show “dsh web authentication required”. This authenticates your browser to your own PC. It does not require a DeepSeek account or approval.</p>
+<p>Restart Chromium, confirm the extension card shows <strong>0.1.32</strong>, open the Augmentor side panel and try a prompt with a configured model. <code>http://127.0.0.1:3080/api/augmentor</code> should report version <code>0.1.32</code> and <code>pipes: 1</code>. If you use a custom <code>DSH_HOME</code>, use the same value for DSH, the installer and browser/native host.</p>
+</div>
           </div>
         </div>
+<div class="glass-card" id="model-picker" style="margin-top:1.5rem;">
+<h3 class="color-secondary">Recommended companion: Model Picker Augmented</h3>
+<p><strong>Version 1.1.2</strong> supports DSH 0.1.5-rc.1 and fixes the plugin-loading error about undefined <code>settings</code>. It adds model search, pins and visibility controls to DSH. Augmentor uses the same model curation. This companion is optional.</p>
+<p>Install the package from its <a href="https://github.com/ManoloRemiddi/dsh-model-picker-augmented/releases/tag/v1.1.2">GitHub release</a>:</p>
+<div class="code">dsh plugin --profile web add https://github.com/ManoloRemiddi/dsh-model-picker-augmented/releases/download/v1.1.2/dsh-model-picker-augmented-1.1.2.tgz</div>
+<p>Restart DSH and reload its page. If you already linked this plugin from a local Git checkout, update that checkout to <code>v1.1.2</code> instead of adding a second copy. <a href="https://github.com/ManoloRemiddi/dsh-model-picker-augmented">Source and full instructions</a>.</p>
+</div>
       </div>
     </section>
 
@@ -561,6 +560,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
         <p class="step-num">FAQ</p>
         <h2 class="section-head">Good questions, <span class="gradient-text">straight answers.</span></h2>
 
+<div class="faq-item reveal"><button class="faq-q"><span>Do I need a DeepSeek account? Can I work offline?</span><span class="chev">▾</span></button><div class="faq-a">DSH's local web login only connects your browser to DSH on your PC. Reopen the complete URL printed by <code>dsh web</code> if authentication is required. A configured local model can run offline once its software and model files are installed. Cloud models need their provider's credentials and internet; visiting online pages also requires internet.</div></div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>Can I use local and cloud models together?</span><span class="chev">▾</span></button>
           <div class="faq-a">Yes. The picker lists whatever your DSH settings expose: local llama.cpp routes and the built-in DeepSeek cloud route. Start on a local model, switch to a cloud one mid-project, and back again. Each switch keeps the session’s id and context; the next reply comes from the new model.</div>
@@ -571,7 +571,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
         </div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>Which browsers and models work?</span><span class="chev">▾</span></button>
-          <div class="faq-a">Any Chromium-based browser — including <strong style="color:#fff;">Google Chrome, Microsoft Edge, Brave, Opera, Vivaldi and Arc</strong>, plus plain Chromium builds (see the browser list above). <strong style="color:#fff;">Firefox and Safari: coming soon</strong> — the extension is standard MV3, so the same codebase ships to both. Models are whatever your DSH settings define; no route is hand-declared in Augmentor, so it can never drift from the app. For cloud, the DeepSeek key comes from your DSH credential store.</div>
+          <div class="faq-a">The extension targets Chromium-based browsers. The complete installation is tested on Linux with Chromium; native-host configuration varies by browser and operating system. Firefox and Safari are not supported yet. Models come from your DSH configuration.</div>
         </div>
         <div class="faq-item reveal">
           <button class="faq-q"><span>Is this safe? What can it reach?</span><span class="chev">▾</span></button>
@@ -602,7 +602,7 @@ Do not change anything outside DeepSeek Harness, the Augmentor repo, and the Chr
             <a href="#install" class="btn btn-round">Get the extension</a>
             <a href="docs.html" class="btn btn-ghost">Read the architecture</a>
           </div>
-          <p class="veil-caption mt-10">v0.1.30 · preview build · not yet on the store · load it unpacked from the repo — the DSH plugin is on npm as <span class="mono">dsh-augmentor</span>.</p>
+          <p class="veil-caption mt-10">v0.1.32 · GitHub ZIP includes plugin + extension · load unpacked · npm alternative: <span class="mono">dsh-augmentor@0.1.32</span>.</p>
         </div>
       </div>
     </section>
