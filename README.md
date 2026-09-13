@@ -17,6 +17,7 @@ real browser behind a visible frost veil.
 
 - `index.html` — landing page (hero, models, in-action, features, veil, install, FAQ).
 - `docs.html` — architecture & install details.
+- `plugins.html`, `assets/plugins.css` — plugin explanations and individual/collection downloads.
 - `favicon.svg`, `assets/` — styles, images, and the veil WebGL demo.
 - All asset references are **relative**, so the site serves unchanged from the repo root.
 
@@ -54,3 +55,12 @@ redirect is handled by GitHub Pages edge once the domain is verified.
   in sync with the released product README and GitHub release assets.
 - `config`-level defaults: none. Everything the site claims matches the plugin
   and extension behavior; keep claims in step with the product code.
+
+## Plugin downloads
+
+The plugins page links to pinned GitHub Release assets. The collection ZIP is
+built from verified, unmodified individual packages in the
+[collection repository](https://github.com/ManoloRemiddi/deepseek-harness-plugins).
+When publishing a new collection, update its manifest and guide, verify the
+archive, publish the release, then update the website’s version labels and links.
+Preview status and setup limitations must remain visible before download.

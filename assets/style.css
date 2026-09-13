@@ -939,3 +939,17 @@ footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem
 .flex-center { display: flex; justify-content: center; gap: 0.9rem; flex-wrap: wrap; }
 .font-semibold { font-weight: 600; }
 .text-mid { color: var(--text-mid); }
+
+/* Plugin collection navigation. */
+.nav-plugins-mobile { display:none; }
+.plugin-footer-link { margin-top:24px;font-size:14px;color:#6ee7b7; }
+@media(max-width:860px) {
+  .nav-plugins-mobile { display:block;color:#6ee7b7;font-size:13px;margin-left:auto; }
+  .nav-row { flex-wrap:wrap; }
+  .wordmark { min-width:0; }
+}
+@media(max-width:480px) {
+  .nav-row>.wordmark { font-size:17px; }
+  .nav-row>.wordmark .accent { display:block;font-size:10px; }
+  .nav-row>.nav-cta { font-size:12px;padding:8px; }
+}
