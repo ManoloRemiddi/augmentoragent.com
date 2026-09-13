@@ -941,10 +941,8 @@ footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem
 .text-mid { color: var(--text-mid); }
 
 /* Plugin collection navigation. */
-.nav-plugins-mobile { display:none; }
 .plugin-footer-link { margin-top:24px;font-size:14px;color:#6ee7b7; }
 @media(max-width:860px) {
-  .nav-plugins-mobile { display:block;color:#6ee7b7;font-size:13px;margin-left:auto; }
   .nav-row { flex-wrap:wrap; }
   .wordmark { min-width:0; }
 }
@@ -962,5 +960,18 @@ footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem
 }
 @media(max-width:360px) {
   .nav-row>.wordmark { font-size:14px; }
-  .nav-plugins-mobile { font-size:11px; }
 }
+
+/* Homepage doorway to the separate DSH plugin collection. */
+.dsh-collection-callout { display:grid;grid-template-columns:1.35fr 1fr;gap:48px;padding:42px;border:1px solid #35634a80;border-radius:24px;background:linear-gradient(125deg,#102e22e6,#08130ee6); }
+.dsh-collection-label { color:#6ee7b7;font:11px var(--font-mono);letter-spacing:.12em; }
+.dsh-collection-callout h2 { font-size:clamp(28px,3.2vw,40px);line-height:1.2;letter-spacing:-.03em;margin:16px 0; }
+.dsh-collection-callout p:not(.dsh-collection-label) { color:#bdcfc3;font-size:15px;line-height:1.8; }
+.dsh-collection-callout .btn { margin-top:14px; }
+.dsh-collection-callout .dsh-collection-note { font-size:12px!important;color:#9bb5a5!important;margin-top:18px; }
+.dsh-collection-features { list-style:none;padding:0;margin:0;align-self:center; }
+.dsh-collection-features li { display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:16px 0;border-bottom:1px solid #ffffff14; }
+.dsh-collection-features li:last-child { border-bottom:0; }
+.dsh-collection-features span { font-size:14px;color:#e2f3e8; }
+.dsh-collection-features small { font-size:12px;color:#9bb5a5; }
+@media(max-width:760px) { .dsh-collection-callout { grid-template-columns:1fr;gap:20px;padding:26px; } }
