@@ -953,3 +953,14 @@ footer .legal { color: var(--text-ghost); font-size: 0.78rem; margin-top: 1.4rem
   .nav-row>.wordmark .accent { display:block;font-size:10px; }
   .nav-row>.nav-cta { font-size:12px;padding:8px; }
 }
+/* Keep the mobile header on one row so it does not cover the page heading. */
+@media(max-width:480px) {
+  .nav-wrap { padding:0 16px; }
+  .nav-row { gap:6px; }
+  .nav-row>.wordmark { font-size:16px; }
+  .nav-row>.nav-cta { font-size:11px;padding:6px; }
+}
+@media(max-width:360px) {
+  .nav-row>.wordmark { font-size:14px; }
+  .nav-plugins-mobile { font-size:11px; }
+}
