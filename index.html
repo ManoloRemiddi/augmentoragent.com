@@ -9,13 +9,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Augmentor Agent · real browser hands for DeepSeek Harness</title>
-  <meta name="description" content="Augmentor is a DeepSeek Harness plugin + Chromium extension that gives your agent control of your real browser with local or cloud models, behind a visible frost veil so you always see it working.">
+  <title>Augmentor Agent · Browser and Desktop for DeepSeek Harness</title>
+  <meta name="description" content="Meet Augmentor Agent Browser and Desktop, powered by DeepSeek Harness. Browser is tested on Linux with Chromium; Desktop is a Linux preview. macOS and Windows are planned.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css?v=16">
+  <link rel="stylesheet" href="assets/style.css?v=17">
 </head>
 <body class="bg-black text-zinc-100 antialiased overflow-x-hidden">
 
@@ -53,12 +53,12 @@
         <div class="nav-row">
           <a href="#top" class="wordmark"><span class="light">Augmentor Agent</span> <span class="accent">powered by DSH</span></a>
           <div class="nav-links">
-            <a href="#models" class="nav-anchor">Models</a>
+            <a href="#products" class="nav-anchor">Products</a>
             <a href="#action" class="nav-anchor">In action</a>
             <a href="#how" class="nav-anchor">How it works</a>
             <a href="#features" class="nav-anchor">Features</a>
             <a href="#veil" class="nav-anchor">The veil</a>
-            <a href="#browsers" class="nav-anchor">Browsers</a>
+            <a href="#browsers" class="nav-anchor">Platforms</a>
             <a href="#install" class="nav-anchor">Install</a>
             <a href="#faq" class="nav-anchor">FAQ</a>
           </div>
@@ -73,7 +73,7 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             </a>
           </div>
-          <a href="#install" class="nav-cta">Get the extension</a>
+          <a href="#install" class="nav-cta">Get Browser</a>
         </div>
       </div>
     </div>
@@ -85,36 +85,20 @@
     <section id="top" class="hero">
       <div class="hero-split">
         <div class="hero-text">
-          <p class="kicker">DeepSeek Harness plugin · Chromium extension</p>
-          <h1>Give your DeepSeek Harness agent <span class="gradient-text">real browser hands.</span></h1>
-          <p class="sub">Augmentor lets your agent do the web work for you: it opens pages, reads them, clicks, and types in your <strong style="color:#fff;">real Chromium browser</strong> — so you stop doing repetitive tasks by hand. It runs on the DSH you already have, and every action happens behind a frost veil you can watch.</p>
+          <p class="kicker">Browser + Desktop · Powered by DeepSeek Harness</p>
+          <h1>Your agent. Your browser. <span class="gradient-text">Your desktop.</span></h1>
+          <p class="sub">Augmentor Agent brings DeepSeek Harness into the tools you use every day. Choose the <strong>Browser extension</strong> for visible web automation, or explore the <strong>Desktop app</strong> for a native workspace. Linux comes first, with macOS and Windows planned.</p>
           <div class="hero-cta-row">
-            <a href="#install" class="btn btn-round">Add to Chromium</a>
+            <a href="#products" class="btn btn-round">Explore both products</a>
             <a href="#action" class="btn btn-ghost">See it in action</a>
           </div>
-          <div class="compat-strip">
-            <div class="compat-group" aria-label="Works today in Chromium-based browsers">
-              <span class="compat-logo" title="Google Chrome"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-chrome"/></svg></span>
-              <span class="compat-logo" title="Microsoft Edge"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-edge"/></svg></span>
-              <span class="compat-logo" title="Brave"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-brave"/></svg></span>
-              <span class="compat-logo" title="Opera"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-opera"/></svg></span>
-              <span class="compat-logo" title="Vivaldi"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-vivaldi"/></svg></span>
-              <span class="compat-logo" title="Arc"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-arc"/></svg></span>
-            </div>
-            <span class="compat-div" aria-hidden="true"></span>
-            <div class="compat-group soon" aria-label="Coming soon: Firefox and Safari">
-              <span class="compat-logo" title="Firefox — coming soon"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-ff"/></svg></span>
-              <span class="compat-logo" title="Safari — coming soon"><svg width="20" height="20" aria-hidden="true"><use width="20" height="20" href="#logo-safari"/></svg></span>
-              <span class="compat-soon">coming soon</span>
-            </div>
-          </div>
-          <p class="compat-line">Works in any Chromium-based browser · <a href="#browsers">which one is yours?</a></p>
+          <p class="compat-line">Browser: Linux + Chromium tested · Desktop: Linux preview<br><a href="#browsers">Check platform support before installing</a></p>
           <ul class="hero-benefits">
             <li><span class="tick">✓</span><span><b>It does the clicking and typing.</b> Navigate, read, fill forms, extract, and step through multi-tab flows — in the tab you’re actually looking at, every single turn.</span></li>
             <li><span class="tick">✓</span><span><b>Your models, your call.</b> Run it on a local llama.cpp model for privacy and free, or DeepSeek in the cloud — switch per conversation.</span></li>
             <li><span class="tick">✓</span><span><b>You can trust it.</b> A frost veil sits over the tab it’s driving and tells you in plain words what it’s doing, then melts.</span></li>
           </ul>
-          <p class="hero-meta mt-6"><span class="hl">No second runtime · no fork · no DSH patch.</span> It snaps onto the DSH you already run.</p>
+          <p class="hero-meta mt-6"><span class="hl">Browser edition · powered by your existing DSH.</span> It snaps onto the DSH you already run.</p>
         </div>
         <div class="hero-visual">
           <div>
@@ -144,6 +128,13 @@
       </div>
     </div>
 
+<section id="products" class="section"><div class="shell">
+<p class="step-num">TWO WAYS TO USE AUGMENTOR</p><h2 class="section-head">One agent, <span class="gradient-text">two workspaces.</span></h2>
+<div class="product-grid">
+<article class="product-card"><p class="product-status">Browser · Public download</p><h3>Augmentor Agent Browser</h3><p>Give your DSH agent control of your real browser: navigate, read, click and type, with a visible frost veil while it works.</p><p><strong>Version 0.1.32 · Tested on Linux with Chromium.</strong> Requires DeepSeek Harness and a native companion installed on your computer. It is not a standalone, all-platform extension.</p><a href="#install" class="btn btn-round">Download Browser</a> <a href="docs.html">Installation guide</a></article>
+<article class="product-card"><p class="product-status">Desktop · Linux preview</p><h3>Augmentor Agent Desktop</h3><p>A native Augmentor Agent workspace for DeepSeek Harness, bringing conversations and DSH plugin capabilities into a desktop app.</p><p><strong>Version 0.2.9 preview · Debian 13, 64-bit Intel/AMD.</strong> The Linux package is prepared; a public download is not available yet. macOS is next, followed by Windows.</p><a href="desktop.html" class="btn btn-round">Explore Desktop</a></article>
+</div><p class="section-lead" style="margin-top:2rem">The browser demonstrations and installation steps below describe the public Browser 0.1.32 release.</p>
+</div></section>
     <!-- Models: local or cloud -->
     <section id="models" class="section">
       <div class="shell">
@@ -412,77 +403,18 @@
       </div>
     </section>
 
-    <!-- Browsers -->
-    <section id="browsers" class="section">
-      <div class="shell">
-        <p class="step-num">YOUR BROWSER</p>
-        <h2 class="section-head">Works where you <span class="gradient-text">already browse.</span></h2>
-        <p class="section-lead">Augmentor ships as a standard Chromium extension — and most browsers out there are Chromium-based these days, whether you know it or not. If yours is, it works today. Firefox and Safari are on the way.</p>
-
-        <div class="browser-boards reveal">
-          <div class="browser-board works">
-            <div class="board-head">
-              <span class="board-tag ok">✓ Works today</span>
-              <h3>Any Chromium-based browser</h3>
-            </div>
-            <div class="browser-row">
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Google Chrome"><use width="44" height="44" href="#logo-chrome"/></svg></span>
-                <span class="browser-name">Chrome</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Microsoft Edge"><use width="44" height="44" href="#logo-edge"/></svg></span>
-                <span class="browser-name">Edge</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Brave"><use width="44" height="44" href="#logo-brave"/></svg></span>
-                <span class="browser-name">Brave</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Opera"><use width="44" height="44" href="#logo-opera"/></svg></span>
-                <span class="browser-name">Opera</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Vivaldi"><use width="44" height="44" href="#logo-vivaldi"/></svg></span>
-                <span class="browser-name">Vivaldi</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Arc"><use width="44" height="44" href="#logo-arc"/></svg></span>
-                <span class="browser-name">Arc</span>
-              </div>
-              <span class="browser-more">…and any other Chromium build</span>
-            </div>
-            <p class="board-note">Not sure if yours counts? Open your browser’s <em>About</em> page — if it says “Chromium” anywhere, you’re covered.</p>
-          </div>
-
-          <div class="browser-board soon">
-            <div class="board-head">
-              <span class="board-tag soon">Coming soon</span>
-              <h3>Firefox &amp; Safari</h3>
-            </div>
-            <div class="browser-row">
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Firefox"><use width="44" height="44" href="#logo-ff"/></svg></span>
-                <span class="browser-name">Firefox</span>
-                <span class="card-soon">soon</span>
-              </div>
-              <div class="browser-card">
-                <span class="browser-logo"><svg width="44" height="44" aria-label="Safari"><use width="44" height="44" href="#logo-safari"/></svg></span>
-                <span class="browser-name">Safari</span>
-                <span class="card-soon">soon</span>
-              </div>
-            </div>
-            <p class="board-note">Firefox and Safari are not supported yet. The current extension and native-host installer target Chromium; platform support needs separate testing.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="browsers" class="section"><div class="shell"><p class="step-num">PLATFORM SUPPORT</p><h2 class="section-head">Linux first. <span class="gradient-text">More platforms ahead.</span></h2>
+<p class="section-lead">A Chromium extension alone does not make the complete product cross-platform. Augmentor Browser also needs a native companion, whose installation and registration depend on the operating system.</p>
+<div class="platform-table"><table><caption>Current availability and planned support</caption><thead><tr><th scope="col">Product</th><th scope="col">Linux</th><th scope="col">macOS</th><th scope="col">Windows</th></tr></thead><tbody><tr><th scope="row">Browser 0.1.32</th><td>Public download; tested with Chromium</td><td>Not verified; native companion support planned</td><td>Not verified; native companion support planned</td></tr><tr><th scope="row">Desktop 0.2.9 preview</th><td>Debian 13 amd64 package prepared; public download pending</td><td>Planned next</td><td>Planned afterward</td></tr></tbody></table></div>
+<p class="section-lead" style="margin-top:1.5rem">Other Chromium-based browsers may need additional configuration and are not all verified. Firefox and Safari are not supported. The Desktop preview is not yet validated across every Linux distribution.</p>
+<div class="product-card" id="roadmap"><h3>What comes next</h3><p>Publish the Linux Desktop preview, then complete macOS and Windows support. DeepSeek Harness (DSH) is the current backend. Pi support is deferred, with Pi extensions planned later; initial Pi support will not include all DSH plugin capabilities. No release dates are announced.</p></div>
+</div></section>
 
     <!-- Install -->
     <section id="install" class="section">
       <div class="shell">
         <p class="step-num">INSTALL</p>
-        <h2 class="section-head">Up and running in <span class="gradient-text">about five minutes.</span></h2>
+        <h2 class="section-head">Install <span class="gradient-text">Augmentor Agent Browser.</span></h2>
         <p class="section-lead">Augmentor 0.1.32 is compatible with DSH 0.1.5-rc.1. Download the complete bundle, then use the assistant prompt or follow the manual steps. Tested on Linux with Chromium.</p>
 
         <p><a class="btn btn-primary" href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip">Download Augmentor 0.1.32 ZIP</a> &nbsp; <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/tag/v0.1.32">GitHub release and source</a></p>
