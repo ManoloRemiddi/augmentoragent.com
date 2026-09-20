@@ -34,12 +34,12 @@ applies to glass and scenery; text, icons and controls remain opaque.
 
 This is a browser port, not an embedded Qt binary or a claim of pixel-identical
 rasterization. Font smoothing, HTML text layout, image resampling and random
-initial particle positions can differ. Gallery videos remain actual native
+initial particle positions can differ. The homepage gallery videos remain actual native
 captures from `scripts/capture-website-demo.py`, with synthetic conversation text.
 
-Motion starts on unless reduced motion is requested; gallery videos start paused.
+Motion starts on unless reduced motion is requested.
 OS reduced-motion changes pause preview animation. Hidden/offscreen previews stop
-ticking and resume when visible. Hidden pages stop gallery videos. **Pause motion**
+ticking and resume when visible. **Pause motion**
 only affects the browser demonstration; **Animate in the agent** is exported.
 **Enable activity effects** is the native global `flares` flag and gates plasma
 and butterflies alike. **Show a flare** triggers a single native-shaped eruption
@@ -108,3 +108,10 @@ colour gradients. The 390px frame (375px content plus scrollbar) had no horizont
 overflow. Both built-ins, custom light and browser-normalized embedded
 image exports still passed the actual native import dialog and preview render.
 The running desktop, login setup, model and microphone were not changed.
+
+## Creation-first page
+
+The Skin Studio page opens directly on its heading, editor and live preview.
+The introductory hero and two animation showcase cards have been removed from
+this page. Futuristic and Blossom lake remain in the **Start from** selector.
+The homepage skin showcases and their shared media assets remain available.

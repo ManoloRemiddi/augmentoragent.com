@@ -37,7 +37,6 @@ function render(){
 }
 function usePreset(name){operation++;busy=false;appearance=structuredClone(presets[name]);uploaded='';$('image-file').value='';$('image-status').textContent='No uploaded image.';$('skin-name').value='My '+name;$('preset').value=name;sync();}
 $('preset').addEventListener('change',()=>usePreset($('preset').value));
-for(const b of document.querySelectorAll('[data-preset]'))b.addEventListener('click',()=>{usePreset(b.dataset.preset);$('studio').scrollIntoView({behavior:reduced.matches?'instant':'smooth'});});
 for(const key of ['theme','effect'])$(key).addEventListener('change',()=>{appearance[key]=$(key).value;render();});
 for(const key of ['animation','flares'])$(key).addEventListener('change',()=>{appearance[key]=$(key).checked;render();});
 $('skin-name').addEventListener('input',render);$('background').addEventListener('change',()=>{appearance.background=$('background').value;appearance.background_image=appearance.background==='uploaded'?uploaded:'';render();});
@@ -46,7 +45,6 @@ $('reset-colours').addEventListener('click',()=>{appearance.format_colours={};re
 $('preview-flare').addEventListener('click',()=>preview.triggerFlare());
 $('preview-motion').addEventListener('click',()=>{previewMotion=!previewMotion;render();});
 reduced.addEventListener('change',()=>{if(reduced.matches){previewMotion=false;render();}});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){for(const video of document.querySelectorAll('video'))video.pause();}});
 $('controls').addEventListener('submit',event=>event.preventDefault());
 $('image-file').addEventListener('change',async()=>{
  const file=$('image-file').files[0];if(!file)return;const current=++operation;busy=true;render();
