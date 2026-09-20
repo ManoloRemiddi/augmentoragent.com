@@ -9,9 +9,9 @@ Official website for **Augmentor Agent** — real browser hands for DeepSeek Har
 Published with **GitHub Pages** from the `main` branch (repo root), served at
 <https://augmentoragent.com>.
 
-Two pieces: a DeepSeek Harness plugin (`dsh-augmentor`, installed from the
-Augmentor repo's `plugin/` package) plus a Chromium extension that drives your
-real browser behind a visible frost veil.
+The current complete preview combines native Desktop, a matching Chromium extension,
+DSH, required plugins and optional local voice/dual-memory engines. The installer
+and exact qualification scope are linked from the landing page.
 
 ## Repo layout
 
@@ -64,3 +64,11 @@ built from verified, unmodified individual packages in the
 When publishing a new collection, update its manifest and guide, verify the
 archive, publish the release, then update the website’s version labels and links.
 Preview status and setup limitations must remain visible before download.
+
+## September 20 complete preview
+
+The landing page links to `v0.2.9-complete-preview.1` in the public distribution
+repository. Native screenshots and the six-second WebM use synthetic content and
+the built-in Blossom lake skin. The skin film starts paused and has a playback
+button; Motion off also pauses it. Legacy Browser/Fedora/collection instructions
+remain explicitly marked as separate older distributions.

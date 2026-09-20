@@ -81,6 +81,7 @@
     cancelAnimationFrame(raf); raf=0;
     toggle.textContent=enabled?'Motion on':'Motion off'; toggle.setAttribute('aria-pressed',String(enabled));
     document.body.classList.toggle('motion-off',!enabled || document.hidden);
+    if(!enabled || document.hidden) document.querySelector('#skin-film')?.pause();
     if(enabled&&!document.hidden){last=performance.now();raf=requestAnimationFrame(frame);}
     else draw(0);
   }
@@ -102,5 +103,12 @@
     try{await navigator.clipboard.writeText(source.value);status.textContent='Installation prompt copied. Paste it into your coding assistant.';}
     catch{source.focus();source.select();status.textContent='Select and copy the highlighted prompt with Ctrl+C (or Command+C).';}
   }));
+  const film=document.querySelector('#skin-film'),filmButton=document.querySelector('#skin-play');
+  filmButton?.addEventListener('click',async()=>{
+    if(!film.paused){film.pause();return;}
+    try{await film.play();}catch{filmButton.textContent='Use video controls to play';}
+  });
+  film?.addEventListener('play',()=>{filmButton.textContent='Pause skin animation';});
+  film?.addEventListener('pause',()=>{filmButton.textContent='Play skin animation';});
   resize();sync();
 })();
