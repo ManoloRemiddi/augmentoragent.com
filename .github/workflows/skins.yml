@@ -1,0 +1,15 @@
+# Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT
+name: Skin format checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  skin-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+      - run: node --test tests/skin-format.test.mjs
+      - run: node --check assets/skin-studio.mjs && node --check assets/skin-images.mjs && node --check assets/redesign.js

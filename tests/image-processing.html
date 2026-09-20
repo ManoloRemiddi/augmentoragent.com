@@ -1,0 +1,25 @@
+<!doctype html><meta charset="utf-8"><title>Skin image processing contract checks</title>
+<!-- Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT -->
+<h1>Skin image processing contract checks</h1><p>Synthetic images only. Exercises the production image normalizer.</p><button id="run">Run image checks</button><pre id="results"></pre><textarea id="fixture" aria-label="Normalized image skin"></textarea>
+<script type="module">
+import {prepareImage} from '../assets/skin-images.mjs?v=1';
+import {serialize,presets} from '../assets/skin-format.mjs?v=1';
+const result=document.querySelector('#results');
+document.querySelector('#run').addEventListener('click',async()=>{
+ result.textContent='Running…';
+ try{
+  const canvas=document.createElement('canvas');canvas.width=2400;canvas.height=1800;
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#836486';ctx.fillRect(0,0,2400,1800);ctx.fillStyle='#dbb998';ctx.fillRect(500,600,600,300);
+  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));const image=await prepareImage(blob);
+  if(image.width!==1600||image.height!==1200)throw Error('Image was not fitted to native dimensions.');
+  const raw=Uint8Array.from(atob(image.encoded),c=>c.charCodeAt(0));const restored=await prepareImage(new Blob([raw]),true);
+  if(restored.width!==1600)throw Error('Portable image could not be read again.');
+  for(const blob of [new Blob(['<svg></svg>'],{type:'image/png'}),new Blob([new Uint8Array(20*1024*1024+1)],{type:'image/png'})]){
+   let refused=false;try{await prepareImage(blob);}catch{refused=true;}if(!refused)throw Error('Unsafe image accepted.');
+  }
+  let refused=false;try{await prepareImage(blob,true);}catch{refused=true;}if(!refused)throw Error('Oversized shared dimensions accepted.');
+  document.querySelector('#fixture').value=serialize('Uploaded image fixture',{...presets['Blossom lake'],background:'uploaded',background_image:image.encoded});
+  result.textContent='PASS: resize, JPEG normalization, portable re-import, invalid format refusal, oversized upload refusal and oversized shared-dimension refusal.';
+ }catch(error){result.textContent='FAIL: '+error.message;}
+});
+</script>

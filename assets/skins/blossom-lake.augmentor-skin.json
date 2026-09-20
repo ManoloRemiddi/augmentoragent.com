@@ -1,0 +1,24 @@
+{
+  "format": "augmentor-skin",
+  "version": 1,
+  "name": "Blossom lake",
+  "appearance": {
+    "theme": "dark",
+    "hue": 205,
+    "brightness": 0,
+    "accent_hue": 20,
+    "accent_brightness": 0,
+    "saturation": 48,
+    "opacity": 100,
+    "animation": true,
+    "flares": true,
+    "effect": "butterflies-large",
+    "background": "blossom-lake",
+    "background_image": "",
+    "format_colours": {
+      "heading": "#f0b69b",
+      "link": "#a9cbd4",
+      "emphasis": "#fff0e3"
+    }
+  }
+}

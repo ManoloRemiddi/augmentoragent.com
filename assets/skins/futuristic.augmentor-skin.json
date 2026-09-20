@@ -1,0 +1,20 @@
+{
+  "format": "augmentor-skin",
+  "version": 1,
+  "name": "Futuristic",
+  "appearance": {
+    "theme": "dark",
+    "hue": 190,
+    "brightness": 0,
+    "accent_hue": 160,
+    "accent_brightness": 0,
+    "saturation": 48,
+    "opacity": 85,
+    "animation": true,
+    "flares": true,
+    "effect": "plasma",
+    "background": "none",
+    "background_image": "",
+    "format_colours": {}
+  }
+}

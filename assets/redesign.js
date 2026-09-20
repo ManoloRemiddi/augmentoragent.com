@@ -104,6 +104,11 @@
     catch{source.focus();source.select();status.textContent='Select and copy the highlighted prompt with Ctrl+C (or Command+C).';}
   }));
   const film=document.querySelector('#skin-film'),filmButton=document.querySelector('#skin-play');
+  const films={futuristic:{src:'assets/futuristic-animation.webm',poster:'assets/desktop-futuristic.png',label:'Futuristic native desktop with plasma activity'},blossom:{src:'assets/desktop-skin-animation.webm',poster:'assets/desktop-voice-butterflies.png',label:'Blossom lake native desktop with butterfly activity'}};
+  document.querySelectorAll('[data-film]').forEach(button=>button.addEventListener('click',()=>{
+    const choice=films[button.dataset.film];film.pause();film.src=choice.src;film.poster=choice.poster;film.setAttribute('aria-label',choice.label);film.load();filmButton.textContent='Play skin animation';
+    document.querySelectorAll('[data-film]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  }));
   filmButton?.addEventListener('click',async()=>{
     if(!film.paused){film.pause();return;}
     try{await film.play();}catch{filmButton.textContent='Use video controls to play';}

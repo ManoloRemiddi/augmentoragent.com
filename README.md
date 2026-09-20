@@ -69,6 +69,19 @@ Preview status and setup limitations must remain visible before download.
 
 The landing page links to `v0.2.9-complete-preview.1` in the public distribution
 repository. Native screenshots and the six-second WebM use synthetic content and
-the built-in Blossom lake skin. The skin film starts paused and has a playback
-button; Motion off also pauses it. Legacy Browser/Fedora/collection instructions
+the built-in Blossom lake skin. The gallery now also includes Futuristic. Skin
+films start paused and have playback controls; Motion off also pauses the landing
+page film. Legacy Browser/Fedora/collection instructions
 remain explicitly marked as separate older distributions.
+
+## Skin Studio
+
+`skins.html` showcases both Futuristic and Blossom lake with actual native captures
+and provides a browser-only skin editor. Users can choose a built-in starting point,
+upload a local background, edit all portable appearance settings, import an existing
+skin, and download a file for **Colors & skins → Import…** in Augmentor Desktop.
+Images stay in the browser and are embedded in the downloaded file. The editor
+has no persistence or backend; its preview is explicitly approximate.
+
+See [the format, limits and native round-trip checks](tests/SKIN-STUDIO.md).
+The landing page's native animation picker also switches between both skins.
