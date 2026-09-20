@@ -2,8 +2,8 @@
 <!-- Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT -->
 <h1>Skin image processing contract checks</h1><p>Synthetic images only. Exercises the production image normalizer.</p><button id="run">Run image checks</button><pre id="results"></pre><textarea id="fixture" aria-label="Normalized image skin"></textarea>
 <script type="module">
-import {prepareImage} from '../assets/skin-images.mjs?v=1';
-import {serialize,presets} from '../assets/skin-format.mjs?v=1';
+import {prepareImage} from '../assets/skin-images.mjs?v=2';
+import {serialize,presets} from '../assets/skin-format.mjs?v=2';
 const result=document.querySelector('#results');
 document.querySelector('#run').addEventListener('click',async()=>{
  result.textContent='Running…';

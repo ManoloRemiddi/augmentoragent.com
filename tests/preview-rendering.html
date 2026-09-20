@@ -1,0 +1,22 @@
+<!doctype html>
+<!-- Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT -->
+<html lang="en"><meta charset="utf-8"><title>Native preview rendering checks</title><link rel="stylesheet" href="../assets/skin-studio.css?v=2"><style>body{padding:20px}#preview-stage{width:700px}pre{white-space:pre-wrap}</style><h1>Native preview rendering checks</h1><button id="run">Run preview checks</button><pre id="result">Ready.</pre><div id="fixture"></div>
+<script type="module">
+import {NativePreview} from '../assets/skin-preview.mjs?v=2';
+import {presets} from '../assets/skin-format.mjs?v=2';
+const doc=new DOMParser().parseFromString(await (await fetch('../skins.html')).text(),'text/html'),stage=doc.querySelector('#preview-stage');document.querySelector('#fixture').append(stage);
+const preview=new NativePreview(stage),result=document.querySelector('#result');
+const sleep=ms=>new Promise(resolve=>setTimeout(resolve,ms)),assert=(ok,message)=>{if(!ok)throw Error(message);};
+document.querySelector('#run').onclick=async()=>{try{
+ const messages=[];preview.update(presets.Futuristic,false);await document.fonts.ready;await sleep(100);
+ assert(document.fonts.check('13px Native'),'Native font not loaded');
+ const before=preview.canvas.toDataURL();await sleep(100);assert(preview.canvas.toDataURL()===before,'Paused frame moved');messages.push('PASS paused motion and native fonts');
+ preview.update({...presets.Futuristic,opacity:35},false);assert(getComputedStyle(stage.querySelector('article')).opacity==='1','Text fades with panel');assert(Math.abs(Number(getComputedStyle(stage.querySelector('.preview-glass')).opacity)-89/255)<.00001,'Glass opacity mismatch');messages.push('PASS independent glass transparency');
+ preview.update({...presets.Futuristic,flares:false},false);assert(!preview.ctx.getImageData(0,0,840,990).data.some(x=>x),'Disabled effects still draw');messages.push('PASS native global effects switch');
+ preview.update(presets.Futuristic,true);preview.visible=false;preview.schedule();const start=performance.now();for(let i=0;i<12;i++){preview.phase+=.04;preview.draw(.04);}messages.push('Plasma rendering mean: '+((performance.now()-start)/12).toFixed(1)+' ms/frame');
+ preview.triggerFlare();assert(preview.flare&&preview.flare.travel>=28,'Flare trigger failed');messages.push('PASS explicit native flare preview');
+ preview.update(presets['Blossom lake'],false);await sleep(150);assert(preview.swarm.butterflies.length===420,'Swarm size mismatch');assert(preview.swarm.colours.includes('#f7b597'),'Native image palette missing');messages.push('PASS 420 native butterflies and Blossom palette');
+ const still=preview.canvas.toDataURL();preview.update(presets['Blossom lake'],true);preview.visible=true;preview.schedule();await sleep(200);assert(preview.canvas.toDataURL()!==still,'Animated butterfly frame did not change');preview.motion=false;preview.schedule();messages.push('PASS animated wings and flight');
+ result.textContent=messages.join('\n')+'\nALL CHECKS PASSED';
+ }catch(error){result.textContent='FAIL '+error.stack;}};
+</script></html>

@@ -11,7 +11,7 @@ from augmentor_linux.preferences import Preferences
 from augmentor_linux.surfaces import AppearanceDialog
 from augmentor_linux.window import Window
 app=QApplication([])
-paths=list((Path(__file__).resolve().parents[1]/'assets/skins').glob('*.json'))+[Path(p) for p in sys.argv[2:]]
+paths=list((Path(__file__).resolve().parents[1]/'assets/skins').glob('*.augmentor-skin.json'))+[Path(p) for p in sys.argv[2:]]
 for path in paths:
  document=read_skin(path)
  dialog=AppearanceDialog(Preferences(False).values)

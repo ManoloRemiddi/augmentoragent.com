@@ -1,5 +1,5 @@
 // Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT
-import {IMAGE_LIMIT} from './skin-format.mjs?v=1';
+import {IMAGE_LIMIT} from './skin-format.mjs?v=2';
 function imageType(bytes){
  if(bytes[0]===255&&bytes[1]===216&&bytes[2]===255)return 'image/jpeg';
  if(bytes.slice(0,8).join()==='137,80,78,71,13,10,26,10')return 'image/png';

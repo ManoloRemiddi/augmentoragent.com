@@ -32,11 +32,21 @@ export function serialize(name,appearance){
  return text;
 }
 export function filename(name){return (name.trim().replace(/[^a-z0-9_-]+/gi,'-').replace(/^-+|-+$/g,'').slice(0,65)||'my-skin')+'.augmentor-skin.json';}
-function hslHex(h,s,l){
+export function hslHex(h,s,l){
  s/=100;l/=100;const a=s*Math.min(l,1-l),f=n=>{const k=(n+h/30)%12;return Math.round(255*(l-a*Math.max(-1,Math.min(k-3,9-k,1)))).toString(16).padStart(2,'0');};
  return '#'+f(0)+f(8)+f(4);
 }
 export function palette(v){
- const dark=v.theme==='dark',sat=v.saturation;
- return {panel:hslHex(v.hue,sat*.5625,Math.max(2.5,Math.min(99,(dark?12:92)+v.brightness/1.5))),accent:hslHex(v.accent_hue,sat,Math.max(15,Math.min(90,(dark?73:30)+v.accent_brightness/1.5))),text:dark?'#eef3f4':'#23343c',muted:dark?'#b6c4c9':'#52636b'};
+ const dark=v.theme==='dark',sat=v.saturation,l=Math.max(2.5,Math.min(99,(dark?12:92)+v.brightness/1.5)),scenic=v.background!=='none';
+ return {panel:hslHex(v.hue,sat*.5625,l),accent:hslHex(v.accent_hue,sat,Math.max(15,Math.min(90,(dark?73:30)+v.accent_brightness/1.5))),bubble:hslHex(v.hue,sat*(.23/.48),Math.min(99.5,l+(dark?9:4.5))),text:scenic?(dark?'#fff0e3':'#243840'):(dark?'#edf3f3':'#152b2c'),muted:'#879493'};
+}
+export function formatDefaults(v){
+ const p=palette(v),code=v.theme==='dark'?['#c4a7ff','#a6da95','#f5a97f','#8bd5ef','#a5adcb','#ed8796']:['#6639ba','#236b35','#9a4600','#005c85','#596579','#a82c46'];
+ return Object.fromEntries(roles.map((role,i)=>[role,i<2?p.accent:i===2?(v.theme==='dark'?'#edf3f3':'#152b2c'):code[i-3]]));
+}
+export function sliderGradient(key,v){
+ if(key==='hue'||key==='accent_hue')return `linear-gradient(90deg,${Array.from({length:7},(_,i)=>hslHex(i*60%360,80,55)).join(',')})`;
+ if(key==='saturation')return `linear-gradient(90deg,#999999,${hslHex(v.accent_hue,100,50)})`;
+ if(key==='opacity')return `linear-gradient(90deg,rgba(127,150,150,.2353),${palette(v).accent})`;
+ return 'linear-gradient(90deg,#232326,#ffffff)';
 }
