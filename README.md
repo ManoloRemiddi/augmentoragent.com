@@ -85,3 +85,7 @@ has no persistence or backend; its preview is explicitly approximate.
 
 See [the format, limits and native round-trip checks](tests/SKIN-STUDIO.md).
 The landing page's native animation picker also switches between both skins.
+
+## September 21 execution recovery release
+
+Current complete download: `v0.2.10-complete-preview.1`. Desktop and Browser include the same bounded execution adapter, with action outcomes, exact-duplicate protection during recovery and explicit tool handoffs. Required plugins install together; Voice is 0.1.16. This remains a Debian 13 amd64 preview, not a claim of universal model correctness. Older standalone collections remain clearly separate.
