@@ -13,7 +13,7 @@ export class NativePreview {
   new ResizeObserver(()=>{this.world.style.transform=`scale(${stage.clientWidth/WIDTH})`;}).observe(stage);
   new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.schedule();}).observe(stage);
   document.addEventListener('visibilitychange',()=>this.schedule());
-  stage.addEventListener('pointermove',e=>{const r=stage.getBoundingClientRect();this.pointer=[(e.clientX-r.left)*WIDTH/r.width,(e.clientY-r.top)*HEIGHT/r.height];});
+  stage.addEventListener('pointermove',e=>{const r=this.world.getBoundingClientRect();this.pointer=[(e.clientX-r.left)*WIDTH/r.width,(e.clientY-r.top)*HEIGHT/r.height];});
   stage.addEventListener('pointerleave',()=>{this.pointer=[-10000,-10000];this.swarm.pointer=null;this.fluid.pointer=null;});
   document.fonts.ready.then(()=>this.draw(0));
  }

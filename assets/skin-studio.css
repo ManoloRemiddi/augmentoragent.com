@@ -9,9 +9,10 @@ input[type=range]::-webkit-slider-runnable-track{height:10px;border-radius:5px;b
 input[type=range]::-moz-range-track{height:10px;border-radius:5px;background:var(--range-gradient)}
 input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:18px;height:18px;margin-top:-4px;border:2px solid #63716f;border-radius:9px;background:white;box-shadow:0 1px 3px #0005}
 input[type=range]::-moz-range-thumb{width:14px;height:14px;border:2px solid #63716f;border-radius:9px;background:white;box-shadow:0 1px 3px #0005}
-.preview-column{position:sticky;top:-150px;grid-column:2;grid-row:1 / span 3}.export-controls{grid-column:1;grid-row:3;min-width:0}.export-controls .download-panel{flex-wrap:wrap}.export-controls ol{padding-left:23px;font-size:13px;color:var(--muted)}.preview-toolbar{flex-wrap:wrap;gap:10px}.preview-toolbar>div{display:flex;gap:6px}.preview-toolbar{position:sticky;top:12px;z-index:3;padding:8px;background:#101119e8;border:1px solid #ffffff0c;border-radius:10px;backdrop-filter:blur(12px)}
-#preview-stage{position:relative;width:100%;aspect-ratio:840/990;overflow:hidden;margin-top:12px;border-radius:20px;background:radial-gradient(ellipse,#20272b66,transparent 70%),repeating-conic-gradient(#ffffff02 0% 25%,transparent 0% 50%) 50%/26px 26px}
-.native-world{position:absolute;left:0;top:0;width:840px;height:990px;transform-origin:0 0;transform:scale(.5)}
+.preview-column{position:sticky;top:24px;grid-column:2;grid-row:1 / span 3}.export-controls{grid-column:1;grid-row:3;min-width:0}.export-controls .download-panel{flex-wrap:wrap}.export-controls ol{padding-left:23px;font-size:13px;color:var(--muted)}.preview-toolbar{flex-wrap:wrap;gap:10px}.preview-toolbar>div{display:flex;gap:6px}.preview-toolbar{position:sticky;top:12px;z-index:3;padding:8px;background:#101119e8;border:1px solid #ffffff0c;border-radius:10px;backdrop-filter:blur(12px)}
+#preview-stage{position:relative;width:100%;aspect-ratio:840/846;overflow:hidden;margin-top:12px;border-radius:20px;background:radial-gradient(ellipse,#20272b66,transparent 70%),repeating-conic-gradient(#ffffff02 0% 25%,transparent 0% 50%) 50%/26px 26px}
+/* Trim 144 native pixels of empty upper effects space, keeping the panel and canvases aligned. */
+.native-world{position:absolute;left:0;top:0;margin-top:-17.142857%;width:840px;height:990px;transform-origin:0 0;transform:scale(.5)}
 .native-world>canvas{position:absolute;inset:0;width:840px;height:990px;pointer-events:none}
 #agent-preview{position:absolute;left:192px;top:192px;width:456px;height:606px;border:1px solid color-mix(in srgb,var(--agent-accent) 29.4%,transparent);border-radius:20px;padding:12px;display:flex;flex-direction:column;gap:5px;color:var(--agent-text);font:13px/1.2 Native,'DejaVu Sans',sans-serif;isolation:isolate;overflow:hidden}
 .preview-glass,.preview-background,.preview-wash{position:absolute;inset:0;pointer-events:none;border-radius:19px;z-index:-1}
@@ -33,3 +34,5 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border:2px solid #637
 
 .preview-foliage{position:absolute;inset:0;width:456px;height:606px;pointer-events:none;z-index:-1}
 @media(max-width:740px){.preview-toolbar{position:static}}
+
+@media(max-width:740px){#controls{grid-row:3}.preview-column{grid-row:2}}

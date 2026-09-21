@@ -1,7 +1,7 @@
 // Copyright © 2026 Manolo Remiddi · SPDX-License-Identifier: MIT
 import {presets,ranges,roles,LIMIT,validate,serialize,filename,formatDefaults,sliderGradient} from './skin-format.mjs?v=2';
 import {prepareImage} from './skin-images.mjs?v=2';
-import {NativePreview} from './skin-preview.mjs?v=2';
+import {NativePreview} from './skin-preview.mjs?v=3';
 const $=id=>document.getElementById(id),status=$('status'),download=$('download');
 let appearance=structuredClone(presets.Futuristic),uploaded='',operation=0,busy=false,previewMotion=!matchMedia('(prefers-reduced-motion: reduce)').matches;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
