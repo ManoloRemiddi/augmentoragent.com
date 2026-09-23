@@ -93,8 +93,17 @@ Current complete download: `v0.2.10-complete-preview.1`. Desktop and Browser inc
 ## September 23 source publication and license
 
 The current Desktop + Browser source is published at
-[augmentor-agent-source](https://github.com/ManoloRemiddi/augmentor-agent-source).
+[augmentor-agent](https://github.com/ManoloRemiddi/augmentor-agent).
 `licensing.html` explains MIT with Augmentor Resale Restriction and links to resale
 permission requests. `augmentor-license.txt` reproduces the product's combined
 license verbatim. Earlier binary downloads retain their shipped licenses. The
 website implementation itself continues to use its own root `LICENSE`.
+
+## September 23 repository consolidation
+
+The single active Desktop + Browser repository is
+[augmentor-agent](https://github.com/ManoloRemiddi/augmentor-agent), branch `main`.
+The website repository remains active solely for this site. The install button
+and copied prompt use the canonical installation guide. Existing 0.2.10 assets,
+legacy Fedora packages and Browser 0.1.32 downloads retain their exact archived
+URLs and original licenses. They are not newly built or relicensed releases.
