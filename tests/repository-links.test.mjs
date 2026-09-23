@@ -13,10 +13,12 @@ const read = name => readFileSync(path.join(root, name), 'utf8');
 test('current source, license contact and installation guides use the canonical repository', () => {
   for (const name of pages) {
     const html = read(name);
+    assert.ok(!html.includes('href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin"'), `${name}: generic project links must use the canonical repository`);
     assert.ok(!html.includes(repo + '-source'), `${name}: obsolete source repository URL`);
     assert.ok(!html.includes(repo + '-history'), `${name}: private history is not a public destination`);
     assert.ok(!html.includes(repo + '-app/blob/main/docs/COMPLETE-INSTALL.md'), `${name}: use the current install guide`);
   }
+  assert.ok(read('docs.html').includes(`project is ${repo}.`));
   const html = read('index.html');
   assert.ok(html.includes(`href="${repo}"`));
   assert.ok(html.includes(`href="${repo}/blob/main/docs/COMPLETE-INSTALL.md"`));
