@@ -89,3 +89,12 @@ The landing page's native animation picker also switches between both skins.
 ## September 21 execution recovery release
 
 Current complete download: `v0.2.10-complete-preview.1`. Desktop and Browser include the same bounded execution adapter, with action outcomes, exact-duplicate protection during recovery and explicit tool handoffs. Required plugins install together; Voice is 0.1.16. This remains a Debian 13 amd64 preview, not a claim of universal model correctness. Older standalone collections remain clearly separate.
+
+## September 23 source publication and license
+
+The current Desktop + Browser source is published at
+[augmentor-agent-source](https://github.com/ManoloRemiddi/augmentor-agent-source).
+`licensing.html` explains MIT with Augmentor Resale Restriction and links to resale
+permission requests. `augmentor-license.txt` reproduces the product's combined
+license verbatim. Earlier binary downloads retain their shipped licenses. The
+website implementation itself continues to use its own root `LICENSE`.
