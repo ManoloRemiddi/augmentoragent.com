@@ -54,3 +54,33 @@ test('every local page link, fragment and static asset resolves in the deployed 
     }
   }
 });
+
+test('plugins use the current brand and homepage links to the full catalogue', () => {
+  const html = read('plugins.html');
+  assert.match(read('index.html'), /href="plugins\.html">DSH plugins/);
+  assert.match(read('index.html'), /href="plugins\.html">Browse plugins/);
+  for (const asset of ['assets/redesign.css', 'assets/brand-orb.css', 'assets/redesign-icon.svg', 'assets/browser-full-chromium.png']) assert.ok(html.includes(asset));
+  assert.ok(!html.includes('assets/style.css'));
+  assert.ok(!html.includes('assets/shot-panel.png'));
+  assert.ok(html.includes(`href="${repo}"`));
+  assert.ok(html.includes('href="index.html#installation"'));
+  for (const id of ['metafolder', 'model-picker', 'adaptive-reasoning', 'prompt-library', 'steering']) assert.ok(html.includes(`id="${id}"`));
+});
+
+test('dated collection and current standalone releases remain distinct', () => {
+  for (const name of ['index.html', 'plugins.html']) {
+    const html = read(name);
+    assert.ok(html.includes('collection-2026.09.14/augmentor-plugins-2026.09.14.zip'));
+    assert.ok(!html.includes('collection-2026.09.13/'));
+    assert.ok(html.includes('Browser 0.1.32'));
+    assert.ok(html.includes('Adaptive Reasoning 0.2.0'));
+    assert.ok(html.includes('Steering'));
+  }
+  const html = read('plugins.html');
+  assert.ok(html.includes('/v0.2.3/dsh-adaptive-reasoning-0.2.3.tgz'));
+  assert.ok(html.includes('/blob/v0.2.3/docs/SETUP.md'));
+  assert.ok(html.includes('/v0.1.0/dsh-steering-0.1.0.tgz'));
+  assert.ok(html.includes('augmentor-plugins-2026.09.14-SHA256SUMS'));
+  assert.ok(html.includes('reselling Augmentor requires written permission'));
+  assert.ok(html.includes('Earlier MIT releases retain their original terms'));
+});
