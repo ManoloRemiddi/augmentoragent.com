@@ -149,31 +149,11 @@
       </div>
 
       <!-- Install -->
-<h2 id="install" class="h3sec">Install Augmentor 0.1.32</h2>
-<p>Compatible with DSH <strong>0.1.5-rc.1</strong>. The GitHub ZIP contains both the plugin and extension, plus their native host and preset.</p>
-<div class="glass-card install-col">
-<h3 class="color-primary">1 · Install or update DSH</h3>
-<p>These steps are verified on <strong>Linux with Chromium</strong>. Install Node.js 22.19+ or 24+, then run:</p>
-<div class="code">npm install -g @deepseek-ai/dsh@0.1.5-rc.1
-dsh --version</div>
-<h3 class="color-primary">2 · Download the complete Augmentor bundle</h3>
-<p><a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip">Download Augmentor 0.1.32 ZIP</a> from the <a href="https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/tag/v0.1.32">GitHub release</a>. Extract it into a permanent location. Keep the entire <code>augmentor-0.1.32/</code> folder: it includes the extension, DSH plugin, native host and agent preset. Moving it later requires running the installer again.</p>
-<h3 class="color-primary">3 · Load the extension and connect the native host</h3>
-<p>Open <code>chrome://extensions</code>, enable <strong>Developer mode</strong>, click <strong>Load unpacked</strong> and select the extracted <code>extension/</code> folder. Copy the extension ID from its card. In a terminal, enter the extracted <code>augmentor-0.1.32</code> folder and run the following, replacing <code>EXTENSION_ID</code> with that ID:</p>
-<div class="code">sh install-native-host.sh EXTENSION_ID "$HOME/.config/chromium"</div>
-<p>The second argument is the browser's user-data root, not its <code>Default</code> subfolder. See <a href="docs.html#install">browser paths and platform notes</a> for other browsers.</p>
-<h3 class="color-secondary">4 · Install the DSH plugin</h3>
-<p>From the same extracted folder:</p>
-<div class="code">dsh plugin --profile web add "$PWD/plugin"</div>
-<p>This installs the plugin included in the GitHub ZIP. Alternatively, use <code>dsh plugin --profile web add dsh-augmentor@0.1.32</code> for the npm package. Choose one method. Use your app's profile name if it is not <code>web</code>.</p>
-<h3 class="color-primary">5 · Restart, authenticate locally and test</h3>
-<p>Restart your existing DSH service or process. For a new installation, run <code>dsh web</code>. Open the <strong>complete URL printed by DSH</strong>, including its token; opening only <code>http://127.0.0.1:3080/</code> in a new browser session can show “dsh web authentication required”. This authenticates your browser to your own PC. It does not require a DeepSeek account or approval.</p>
-<p>Restart Chromium, confirm the extension card shows <strong>0.1.32</strong>, open the Augmentor side panel and try a prompt with a configured model. <code>http://127.0.0.1:3080/api/augmentor</code> should report version <code>0.1.32</code> and <code>pipes: 1</code>. If you use a custom <code>DSH_HOME</code>, use the same value for DSH, the installer and browser/native host.</p>
-</div>
-<div class="glass-card" style="margin-top:1.5rem;"><h3>Browser paths and platforms</h3><p>The installer defaults to Linux Chromium. For another Linux browser, pass its user-data root as the second argument:</p><table class="arch-table"><thead><tr><th>Browser</th><th>Typical Linux path</th></tr></thead><tbody><tr><td>Chromium</td><td><code>~/.config/chromium</code></td></tr><tr><td>Google Chrome</td><td><code>~/.config/google-chrome</code></td></tr><tr><td>Microsoft Edge</td><td><code>~/.config/microsoft-edge</code></td></tr><tr><td>Brave</td><td><code>~/.config/BraveSoftware/Brave-Browser</code></td></tr></tbody></table><p>Custom profiles, sandboxed packages and other operating systems may need different native-messaging registration. macOS and Windows have not been verified for this release; the Linux shell instructions are not a Windows installer.</p></div>
+<h2 id="install" class="h3sec">Install Augmentor 0.2.11</h2>
+<p>The current Desktop and Browser project is https://github.com/ManoloRemiddi/augmentor-agent. The 0.2.11 security release fixes a WebSocket memory-exhaustion vulnerability. Browser 0.1.32 is historical and should no longer be installed.</p>
+<div class="glass-card install-col"><h3>Use the matching complete release</h3><p>For Debian 13 amd64, use the <a href="index.html#installation">complete download and guided installation prompt</a>. It supplies matching Desktop, Browser, native host and plugins. Follow the <a href="https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/COMPLETE-INSTALL.md">current installation guide</a> and verify SHA256SUMS before extraction.</p><p>The npm package <code>dsh-augmentor@0.2.11</code> updates only the DSH plugin. It does not fix an older native host or desktop. Keep all components on the matching release.</p></div>
 <h3 id="updates" class="h3sec">Upgrade an existing installation</h3>
-<div class="callout"><strong>Upgrading from 0.1.31 or earlier?</strong> Update all three parts: plugin, native host and extension. Older versions cannot connect to the new DSH API, so use the manual steps below if the panel updater cannot open. Back up your old Augmentor folder; update any existing linked plugin path, rerun the native-host installer and reload the extension from the new bundle. The installer preserves custom presets and backs up a legacy preset before migrating it.</div>
-<p>For npm installations, pin <code>dsh-augmentor@0.1.32</code> to avoid receiving an older release through package-manager release-age filtering. For local linked installations, keep the registered folder updated or remove the old plugin entry before adding the new path. Restart DSH after installing plugins, and reload the extension after updating its files.</p>
+<p>Preserve profiles, chats, credentials, memory and model settings. The fresh installer refuses existing installations; do not remove user data to bypass it. Follow the <a href="https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/RELEASE-0.2.11.md#existing-installations">reviewed upgrade procedure</a>, finish active tasks before restarting DSH, then reload the matching extension. Custom presets require a reviewed migration.</p>
 <div class="glass-card" id="model-picker" style="margin-top:1.5rem;">
 <h3 class="color-secondary">Recommended companion: Model Picker Augmented</h3>
 <p><strong>Version 1.1.2</strong> supports DSH 0.1.5-rc.1 and fixes the plugin-loading error about undefined <code>settings</code>. It adds model search, pins and visibility controls to DSH. Augmentor uses the same model curation. This companion is optional.</p>
@@ -181,23 +161,7 @@ dsh --version</div>
 <div class="code">dsh plugin --profile web add https://github.com/ManoloRemiddi/dsh-model-picker-augmented/releases/download/v1.1.2/dsh-model-picker-augmented-1.1.2.tgz</div>
 <p>Restart DSH and reload its page. If you already linked this plugin from a local Git checkout, update that checkout to <code>v1.1.2</code> instead of adding a second copy. <a href="https://github.com/ManoloRemiddi/dsh-model-picker-augmented">Source and full instructions</a>.</p>
 </div>
-<div class="glass-card" style="margin-top:1.5rem;"><h3>Install with your coding assistant</h3><p>Copy this prompt, or use the copy button on the <a href="index.html#installation">main installation page</a>.</p><div class="code" style="white-space:pre-wrap;">Install the legacy Augmentor Agent 0.1.32 (DSH plugin, native host and Chromium extension) on this machine. The maintained Desktop and Browser project is https://github.com/ManoloRemiddi/augmentor-agent. Use its current installation guide at https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/COMPLETE-INSTALL.md if I want the complete current preview instead. The 0.1.32 assets below are preserved in an archived repository; do not mix them with a newer companion. Inspect the existing installation first and preserve my settings, chats and browser profile. These steps are tested on Linux with Chromium; check native-messaging support and the browser&#x27;s configuration directory on other platforms before proceeding.
-
-1) Check Node.js (22.19+ or 24+) and install/update the DSH CLI with `npm install -g @deepseek-ai/dsh@0.1.5-rc.1`. Verify `dsh --version`. Keep the existing DSH_HOME and profile; the default profile is web.
-
-2) Download https://github.com/ManoloRemiddi/augmentor-dsh-extension-plugin/releases/download/v0.1.32/augmentor-0.1.32-dist.zip and extract the entire archive into a permanent folder. It contains extension/, plugin/, the native host and the agent preset. Keep all these files together. Back up any older Augmentor folder before replacing it.
-
-3) Have me open chrome://extensions, enable Developer mode and load the extracted extension/ folder using Load unpacked. Obtain the extension ID from its card. If browser control cannot access this page, pause for my ID.
-
-4) From the extracted augmentor-0.1.32 folder, run `sh install-native-host.sh &lt;extension-id&gt; &quot;$HOME/.config/chromium&quot;`. Use the actual browser user-data root if different (not its Default subfolder). Run `dsh plugin --profile web add &quot;$PWD/plugin&quot;`, adapting web only if my app uses a different profile. For an existing linked plugin, update its source directory instead of creating a duplicate.
-
-5) Restart the existing DSH web process or service so it uses the updated CLI and profile; if none is running, use `dsh web`. Open the complete local URL printed by DSH, including its authentication token. This is local browser authentication, not a DeepSeek website login. Do not disclose the token. Restart Chromium and confirm the extension card reports 0.1.32.
-
-6) Verify http://127.0.0.1:3080/api/augmentor reports version 0.1.32 and pipes: 1 after opening the side panel. Confirm the model list, a new chat and a response with an available configured model. Report failures rather than declaring installation complete. Local models can work offline once installed; cloud providers require their own credentials and internet.
-
-Optional recommendation: Model Picker Augmented 1.1.2 adds search, pins and visibility controls to DSH. Install it only if I want it, using `dsh plugin --profile web add https://github.com/ManoloRemiddi/dsh-model-picker-augmented/releases/download/v1.1.2/dsh-model-picker-augmented-1.1.2.tgz`, then restart DSH and reload the page. Update an existing linked installation instead of adding a duplicate.
-
-Report the installed versions and paths, checks performed, and any remaining manual step.</div></div>
+<div class="glass-card" style="margin-top:1.5rem;"><h3>Install with your coding assistant</h3><p>Use the <a href="index.html#installation">current complete installation prompt</a>. It points to the security-fixed 0.2.11 release and requires preservation of existing data.</p></div>
 
       <!-- FAQ -->
 <div class="faq-item reveal"><button class="faq-q"><span>Do I need a DeepSeek account? Can I work offline?</span><span class="chev">▾</span></button><div class="faq-a">DSH's local web login only connects your browser to DSH on your PC. Reopen the complete URL printed by <code>dsh web</code> if authentication is required. A configured local model can run offline once its software and model files are installed. Cloud models need their provider's credentials and internet; visiting online pages also requires internet.</div></div>
@@ -212,7 +176,7 @@ Report the installed versions and paths, checks performed, and any remaining man
       </div>
       <div class="faq-item reveal">
         <button class="faq-q"><span>Is it published / on the store?</span><span class="chev">▾</span></button>
-        <div class="faq-a">The public 0.1.32 release is on GitHub: load its extension unpacked and install the included plugin, or use <code>dsh-augmentor@0.1.32</code> from npm. The extension is not currently distributed through a browser store.</div>
+        <div class="faq-a">The public 0.2.11 complete release is on GitHub. Use its matching extension and native companion; <code>dsh-augmentor@0.2.11</code> is also on npm for the DSH plugin. The extension is not currently distributed through a browser store.</div>
       </div>
 
       <div class="glass-card cta-card reveal mt-10" style="margin-top:3rem;">

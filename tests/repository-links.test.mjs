@@ -6,7 +6,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const repo = 'https://github.com/ManoloRemiddi/augmentor-agent';
-const release = 'https://github.com/ManoloRemiddi/augmentor-agent-app/releases/download/v0.2.10-complete-preview.1/';
+const release = 'https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.11-complete-preview.1/';
 const pages = readdirSync(root).filter(name => name.endsWith('.html'));
 const read = name => readFileSync(path.join(root, name), 'utf8');
 
@@ -31,9 +31,9 @@ test('copy button selects the updated prompt and exact existing release assets',
   assert.ok(prompt, 'installation prompt exists');
   assert.ok(prompt.includes(`project is ${repo}.`));
   assert.ok(prompt.includes(`${repo}/blob/main/docs/COMPLETE-INSTALL.md`));
-  assert.ok(prompt.includes(`${release}augmentor-0.2.10-complete-preview.1.tar.gz`));
+  assert.ok(prompt.includes(`${release}augmentor-0.2.11-complete-preview.1.tar.gz`));
   assert.ok(prompt.includes(`${release}SHA256SUMS`));
-  assert.ok(prompt.includes('archived distribution repository'));
+  assert.ok(prompt.includes('canonical application repository'));
   assert.match(html, /class="[^"]*copy-install[^"]*" data-copy="desktop-install-prompt"/);
   assert.match(read('assets/redesign.js'), /navigator\.clipboard\.writeText\(source\.value\)/);
 });

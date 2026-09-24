@@ -107,3 +107,10 @@ The website repository remains active solely for this site. The install button
 and copied prompt use the canonical installation guide. Existing 0.2.10 assets,
 legacy Fedora packages and Browser 0.1.32 downloads retain their exact archived
 URLs and original licenses. They are not newly built or relicensed releases.
+
+## September 24 security release
+
+Current downloads and copied prompts use canonical `augmentor-agent` release
+`v0.2.11-complete-preview.1`. The legacy Browser install recipe has been retired
+because 0.1.32 contains a vulnerable ws dependency. Historical collection assets
+remain identified as historical; their Augmentor package must not be installed.
