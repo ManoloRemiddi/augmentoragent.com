@@ -114,3 +114,7 @@ Current downloads and copied prompts use canonical `augmentor-agent` release
 `v0.2.11-complete-preview.1`. The legacy Browser install recipe has been retired
 because 0.1.32 contains a vulnerable ws dependency. Historical collection assets
 remain identified as historical; their Augmentor package must not be installed.
+
+Live Pages deployment and anonymous complete-archive/checksum download were verified.
+The live copy button copied the 0.2.11 canonical installation prompt in the in-app
+browser. This website check is separate from the user's Chromium extension state.
