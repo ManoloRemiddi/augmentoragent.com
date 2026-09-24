@@ -120,3 +120,12 @@ The live copy button reported success for the visible 0.2.11 canonical prompt in
 the in-app browser. Its clipboard API did not expose matching clipboard contents,
 so clipboard readback is not claimed. This website check is separate from the
 user's Chromium extension state.
+
+
+## September 24 desktop flare release
+
+Current Desktop/Browser download is `v0.2.12-complete-preview.1` in the canonical
+application repository. It fixes exterior activity effects following an unlocked
+agent onto other workspaces or covering a second agent. Visible versions, download
+links and copied installation prompts all select the matched 0.2.12 complete bundle.
+The existing WebSocket security correction and required plugin versions remain.
