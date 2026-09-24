@@ -129,3 +129,10 @@ application repository. It fixes exterior activity effects following an unlocked
 agent onto other workspaces or covering a second agent. Visible versions, download
 links and copied installation prompts all select the matched 0.2.12 complete bundle.
 The existing WebSocket security correction and required plugin versions remain.
+
+Publication verification: Pages deployed `fc427ce`; the live download button and
+installation textarea both select 0.2.12. Clicking the copy button reported
+success, and the browser clipboard matched the complete visible prompt exactly.
+Anonymous download matched published SHA-256
+`2ce620233e9312db86a0dccac9d07257bd9f700a0d19326b96460463379d1fa4`.
+All 15 website tests passed locally and in CI.
