@@ -145,5 +145,14 @@ Apple Open Anyway approval, manual Chrome extension loading, API-key storage,
 manual update/removal limits and unqualified speech/desktop-control paths. Linux
 0.2.12 links and its copied installation prompt remain unchanged. The Mac app
 bundles its runtimes and required plugins; no personal model configuration is
-used. Publish the page only after the versioned release assets are accessible
-and checksums have been verified.
+used.
+
+Publication verification: Pages deployed `bd205bb` successfully and the website
+checks passed. Live homepage and guide links select the released 508,240,784-byte
+DMG. Its complete anonymous public download matched published SHA-256
+`058a0920e4da753593372a7d499d980b7672590e8499cf929371460b459db8e4`.
+The guide layout, navigation, version, platform and first-launch disclosure were
+checked in the browser. The unchanged Linux download destinations returned HTTP
+200 and the live copy button reported success; clipboard-content readback is not
+claimed for this check. The application release record lists exact Mac UI/DSH
+tests and unqualified consent, speech and updater flows.
