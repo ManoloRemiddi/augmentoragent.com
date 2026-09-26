@@ -145,5 +145,5 @@ Apple Open Anyway approval, manual Chrome extension loading, API-key storage,
 manual update/removal limits and unqualified speech/desktop-control paths. Linux
 0.2.12 links and its copied installation prompt remain unchanged. The Mac app
 bundles its runtimes and required plugins; no personal model configuration is
-used. Publish the page only after the immutable release assets are accessible
+used. Publish the page only after the versioned release assets are accessible
 and checksums have been verified.
