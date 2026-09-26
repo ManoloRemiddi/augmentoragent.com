@@ -136,3 +136,14 @@ success, and the browser clipboard matched the complete visible prompt exactly.
 Anonymous download matched published SHA-256
 `2ce620233e9312db86a0dccac9d07257bd9f700a0d19326b96460463379d1fa4`.
 All 15 website tests passed locally and in CI.
+
+## September 26 macOS preview
+
+The Mac download is a separate Apple-silicon preview from canonical release
+`v0.2.12-macos-preview.1`; `macos.html` is its short guide. It explicitly discloses
+Apple Open Anyway approval, manual Chrome extension loading, API-key storage,
+manual update/removal limits and unqualified speech/desktop-control paths. Linux
+0.2.12 links and its copied installation prompt remain unchanged. The Mac app
+bundles its runtimes and required plugins; no personal model configuration is
+used. Publish the page only after the immutable release assets are accessible
+and checksums have been verified.
