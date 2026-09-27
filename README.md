@@ -156,3 +156,16 @@ checked in the browser. The unchanged Linux download destinations returned HTTP
 200 and the live copy button reported success; clipboard-content readback is not
 claimed for this check. The application release record lists exact Mac UI/DSH
 tests and unqualified consent, speech and updater flows.
+
+## September 27 Mac preview 2
+
+The homepage and Mac guide target `v0.2.12-macos-preview.2` in the canonical
+application repository: the accepted live App size, flare transparency and guided
+DSH setup corrections. The 519 MB DMG contains the sealed `b8dac9d` app. Its SHA-256
+is `946a546c98f37ca43ac3fd4596ef3c87100520bc7639ae0737fedbde72b52ae4`.
+The installation guide now describes Install and start DSH, authenticated browser
+model setup, and immediate 75–150% sizing. Apple approval, unpacked extension and
+manual-update limitations remain visible. Existing Linux links and the copied
+Debian installation prompt are unchanged. All 15 website tests and five JavaScript
+syntax checks pass before deployment. Publication and live verification are
+recorded below when complete.
