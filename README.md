@@ -182,3 +182,19 @@ rendered-layout, live copy-button and clipboard check is not claimed for this ru
 The anonymous full DMG download completed at 12:34:28 UTC: all 519,286,460 bytes
 matched the published SHA-256 above, and the public checksum file matched the
 prepared release. This README-only follow-up does not change the tested interface.
+
+## September 27 Mac preview 3
+
+The homepage and Mac guide now target `v0.2.12-macos-preview.3`, built from
+application source `3627daebbfe88a3f9adc92f2566575b343655b7e` and merged through
+application PR #17. Browser setup discovers installed Chromium apps, provides an
+app chooser and handles Comet's native connection location. The guide uses the
+actual control labels and retains manual browser approval and preview limits.
+
+The 528,906,168-byte DMG passed a complete anonymous download and matched
+SHA-256 `d31488baf9e07329d5f07f62f3f51052bc990d6e3f638dfa33856aa62d0ec694`.
+The matching app passed 130 Mac tests, actual Comet/Chrome fixture chat, DMG
+copy/launch/integrity checks, Mac 14/26 CI and the complete Linux/Home/Browser
+workflow. All 15 website tests pass; Linux install-prompt text is unchanged.
+See the [application release record](https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/MACOS-PREVIEW-3-RELEASE.md)
+for publication, qualification boundaries and deployment verification.
