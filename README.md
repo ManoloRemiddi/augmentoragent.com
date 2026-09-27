@@ -169,3 +169,16 @@ manual-update limitations remain visible. Existing Linux links and the copied
 Debian installation prompt are unchanged. All 15 website tests and five JavaScript
 syntax checks pass before deployment. Publication and live verification are
 recorded below when complete.
+
+Preview 2 was published at 12:30:07 UTC. Website commit `e627dcc` passed
+[website CI](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/36319266879)
+and [Pages deployment](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/36319266526).
+The live homepage, Mac guide and Desktop page match the committed HTML byte for
+byte. All Mac download/checksum links select preview 2. Linux prompt text is
+unchanged; Linux and retained dependency-source download destinations return 200.
+A local IPv4 outage required IPv6 for transfer and HTTP verification; no network
+settings were changed. The in-app browser could not reload the site, so a fresh
+rendered-layout, live copy-button and clipboard check is not claimed for this run.
+The anonymous full DMG download completed at 12:34:28 UTC: all 519,286,460 bytes
+matched the published SHA-256 above, and the public checksum file matched the
+prepared release. This README-only follow-up does not change the tested interface.
