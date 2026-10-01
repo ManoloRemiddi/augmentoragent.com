@@ -198,3 +198,22 @@ copy/launch/integrity checks, Mac 14/26 CI and the complete Linux/Home/Browser
 workflow. All 15 website tests pass; Linux install-prompt text is unchanged.
 See the [application release record](https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/MACOS-PREVIEW-3-RELEASE.md)
 for publication, qualification boundaries and deployment verification.
+
+## October 1 — general browser reliability preview
+
+Download links and the copied install prompt select matched 0.2.13 Linux and Mac
+previews from the canonical application repository. The release strengthens
+general browser observations, omitted-text recovery, long-page reads and tab
+targeting. Existing preview labels and manual setup limits remain.
+
+Both full anonymous public downloads match the tested candidates from source
+`0eb2ec112afa52b886b63606f80967198a7feb0c`:
+
+- Linux complete archive: 72,665,721 bytes; SHA-256
+  `6c327d99b04796f2901850364670aa61015b17f739582c64126421858b56b65d`.
+- Apple-silicon Mac DMG: 522,788,721 bytes; SHA-256
+  `ad7545be4759281ebffc40c27dd109fc691f64dd924e2a799e911e7fd598aac4`.
+
+All 15 website tests pass. Live Pages, copy-button and destination verification
+is recorded after deployment in the application
+[release record](https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/RELEASE-0.2.13.md).
