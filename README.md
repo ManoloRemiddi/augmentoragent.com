@@ -17,6 +17,7 @@ and exact qualification scope are linked from the landing page.
 
 - `index.html` — landing page (hero, models, in-action, features, veil, install, FAQ).
 - `docs.html` — architecture & install details.
+- `windows.html` — Windows 11 25H2+ x64/ARM64 unsigned preview guide and download links. Physical acceptance, signing and automatic updates remain pending.
 - `plugins.html`, `assets/plugins.css` — plugin explanations and individual/collection downloads.
 - `favicon.svg`, `assets/` — styles, images, and the veil WebGL demo.
 - All asset references are **relative**, so the site serves unchanged from the repo root.
