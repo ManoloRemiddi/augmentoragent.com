@@ -245,3 +245,13 @@ is unchanged. All 35 public assets were downloaded anonymously and hashed in
 full at `2026-10-03T16:35:55Z`; their bytes and digests match the qualified candidates.
 Live Pages verification is recorded below after deployment; no physical
 clipboard click or readback is claimed here.
+
+Live verification completed at `2026-10-03T16:38:08Z`: homepage (including the
+default `/` path), Mac guide and Windows guide match website commit
+`4658894671aad934da7273435fa903fc1e4f6007` byte for byte. All download/checksum links select
+the anonymously verified preview-2 assets. The Linux textarea contains the exact
+archive/checksum pair and remains bound to its copy button.
+[Pages deployment](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/37137481918) and
+[website CI](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/37137482688)
+passed. This source/live HTML check did not click the owner's browser or read
+their clipboard.
