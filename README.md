@@ -218,3 +218,30 @@ Both full anonymous public downloads match the tested candidates from source
 All 15 website tests pass. Live Pages, copy-button and destination verification
 is recorded after deployment in the application
 [release record](https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/RELEASE-0.2.13.md).
+
+## October 3 matched Handy preview 2
+
+The homepage, Linux installation textarea and Mac/Windows guides select matching
+preview-2 releases from application source
+`6f001fd395a4575ea58d1899f7b68aa1d5283004`, merged through
+[PR #35](https://github.com/ManoloRemiddi/augmentor-agent/pull/35)
+as `5d4ab848e2d8e1e49a030fa2c139e6b7d65ce009`. All packages include native
+Handy, managed in Augmentor Settings without a separate tray. The recording
+pill follows Augmentor appearance and includes the four-pixel circle correction.
+First-use model download and platform permissions remain explicit. Physical
+microphone/typing acceptance on Mac and Windows is pending; these remain
+unsigned/ad-hoc previews with no coordinated automatic update claim.
+
+| Customer download | Bytes | SHA-256 |
+|---|---:|---|
+| [augmentor-0.2.13-complete-preview.2.tar.gz](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-complete-preview.2/augmentor-0.2.13-complete-preview.2.tar.gz) | 323835139 | `38f300c25d6c98c95e1764302eec7883bc55786cd74fd4113e6cf2ba3962fc0b` |
+| [augmentor-desktop-0.2.13-macos-arm64-preview.dmg](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-macos-preview.2/augmentor-desktop-0.2.13-macos-arm64-preview.dmg) | 755102238 | `1387b3ccd6511e75c48444b1e01ff010eeb08a1a5ede5ae8de929daab3cb84cc` |
+| [Augmentor-0.2.13-windows-arm64-preview.exe](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-windows-preview.2/Augmentor-0.2.13-windows-arm64-preview.exe) | 868399288 | `964b9a3be2eda345f81996d84e07419bb438dbe3b71a91353b471b7235daf40b` |
+| [Augmentor-0.2.13-windows-x64-preview.exe](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-windows-preview.2/Augmentor-0.2.13-windows-x64-preview.exe) | 925485099 | `4f90ab23455bd65ea37259eeb6edc55bf6532e2716adff74ff7e5744e2d3df63` |
+
+All 15 website tests pass, including the copy button's binding to the updated
+installation textarea and exact release URLs. Existing copy-handler behavior
+is unchanged. All 35 public assets were downloaded anonymously and hashed in
+full at `2026-10-03T16:35:55Z`; their bytes and digests match the qualified candidates.
+Live Pages verification is recorded below after deployment; no physical
+clipboard click or readback is claimed here.
