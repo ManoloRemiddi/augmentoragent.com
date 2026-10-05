@@ -256,7 +256,7 @@ archive/checksum pair and remains bound to its copy button.
 passed. This source/live HTML check did not click the owner's browser or read
 their clipboard.
 
-## October 5 preview-3 website candidate
+## October 5 preview-3 website candidate — historical preparation
 
 This candidate updates current Linux, Apple-silicon Mac and Windows x64/ARM64
 download/checksum links and the Linux copied-install prompt to matching preview 3.
@@ -275,3 +275,18 @@ as `a45a4dc821e0e8ca744f81452025c3ddc807898b`.
 The source/merge trees match. Older assets remain immutable and the existing
 website design and preview limits are preserved. Final file sizes, checksums
 and deployment verification will be recorded after publication.
+
+## October 5 matched dictation repair preview 3
+
+The homepage, Linux copied install prompt and Mac/Windows guides now select the matching preview-3 cohort from application source `3d1e6153f1e3aed86f56d915d60cd1d55ea49190`. The [dictation fixes](https://github.com/ManoloRemiddi/augmentor-agent/pull/39) and [release preparation](https://github.com/ManoloRemiddi/augmentor-agent/pull/40) are merged. Saved enabled dictation restores when Augmentor starts after login; the Linux recording overlay retains its static pill and controls during animation on WebKitGTK 2.54. All platforms were prepared before publication. Older dated assets remain immutable.
+
+| Download | Bytes | SHA-256 |
+|---|---:|---|
+| [augmentor-0.2.13-complete-preview.3.tar.gz](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-complete-preview.3/augmentor-0.2.13-complete-preview.3.tar.gz) | 323879679 | `2fc1db9bb66698f83cdef5bc18f121b0b9bb4fb376b6b3c1fbccbb8253580bf7` |
+| [augmentor-desktop-0.2.13-macos-arm64-preview.dmg](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-macos-preview.3/augmentor-desktop-0.2.13-macos-arm64-preview.dmg) | 762480533 | `8c06e2c7a70533d5959cdd54f75fbab9f73c55a03e482378a53e5271ae9e03c7` |
+| [Augmentor-0.2.13-windows-arm64-preview.exe](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-windows-preview.3/Augmentor-0.2.13-windows-arm64-preview.exe) | 868448213 | `066cde09f3bc8ef5c372286d4a3adcfa6b6f005046455dcc5841174c06b5d07e` |
+| [Augmentor-0.2.13-windows-x64-preview.exe](https://github.com/ManoloRemiddi/augmentor-agent/releases/download/v0.2.13-windows-preview.3/Augmentor-0.2.13-windows-x64-preview.exe) | 925498232 | `3074f7529fc47e3e624074a234b0361908344c3e27986810009ddfdfcc72769c` |
+
+Eight exact-source application/package/platform workflows pass. All 35 public assets were downloaded anonymously and hashed in full at `2026-10-05T13:51:50Z`. All 15 website cases and five JavaScript syntax checks pass. [Website CI](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/37320154908) and [Pages deployment](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/37320155115) pass. Live `/`, homepage, Mac/Windows guides and copy-handler source match website commit `8cd60a93dc1ae2eba64667a9edd28f41fc82cb4c` byte for byte at `2026-10-05T13:54:37Z`. Current links select verified preview 3; the Linux textarea contains the exact archive/checksum pair and is bound to its existing copy handler. No physical clipboard click/readback is claimed.
+
+Mac/Windows physical microphone/permission/typing acceptance remains separate from hosted qualification. Existing unsigned/ad-hoc preview and manual-maintenance limits remain; models/personal settings are not bundled. Windows preview 3 must not replace preview 1 or 2 in place. The [application ledger](https://github.com/ManoloRemiddi/augmentor-agent/blob/main/docs/HANDY-DOWNLOADS-2026-10-05.md) records detailed source, qualification and deployment scope. This documentation follow-up does not change the verified HTML.
