@@ -255,3 +255,21 @@ archive/checksum pair and remains bound to its copy button.
 [website CI](https://github.com/ManoloRemiddi/augmentoragent.com/actions/runs/37137482688)
 passed. This source/live HTML check did not click the owner's browser or read
 their clipboard.
+
+## October 5 preview-3 website candidate — paused
+
+The owner requested a break to restart their computer. This candidate updates
+current Linux, Apple-silicon Mac and Windows x64/ARM64 download/checksum links
+and the Linux copied-install prompt to matching preview 3, with saved-enabled
+dictation startup recovery and the Linux animated-overlay rendering repair.
+All 15 website checks pass. This branch is not merged or deployed; the public
+site retains preview 2 until every new platform qualifies, all assets are
+published and anonymously hashed in full, and live website checks pass.
+
+Application customer source is frozen at
+`3d1e6153f1e3aed86f56d915d60cd1d55ea49190`, with
+[draft release preparation PR #40](https://github.com/ManoloRemiddi/augmentor-agent/pull/40).
+The [application pause checkpoint](https://github.com/ManoloRemiddi/augmentor-agent/blob/docs/handy-preview3-pause-oct5/docs/HANDY-DOWNLOADS-2026-10-05.md#october-5-publication-pause-checkpoint)
+records qualification and publication order. Resume only when the owner returns;
+verify all three new release cohorts before merging this website branch. Preserve
+immutable older assets and the existing website design.
